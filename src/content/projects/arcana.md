@@ -24,7 +24,7 @@ and the client, and operate the infrastructure it runs on.
 **Where it came from.** Arcana started as a fork of *Cosmic v2*, a game by another developer
 (09DZL), worked on with xDelik. A different game from my own [Cosmic Realm](/projects/cosmic-realm).
 I forked it as **Tidan's Realm**, developed it into **Tidan's Realm VI** (the name still on its
-client, below), and renamed it **Arcana** when I founded Tidan Games LLC in September 2026.
+client, above), and renamed it **Arcana** when I founded Tidan Games LLC in September 2026.
 
 ## The game
 
