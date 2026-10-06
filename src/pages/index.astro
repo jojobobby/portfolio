@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectTile from '../components/ProjectTile.astro';
+
+const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const professional = all.filter((p) => p.data.section === 'professional');
+const studio = all.filter((p) => p.data.section === 'studio');
+const earlier = all.filter((p) => p.data.section === 'earlier');
+const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+---
+<Base>
+  <section class="intro">
+    <p><strong>Hello, and welcome to my portfolio!</strong></p>
+    <p>
+      I'm a site reliability engineer at <strong>Vail Systems</strong>, where I led the migration of
+      production workloads from AWS ECS to a self-managed Kubernetes platform built on k3s, Helm and
+      Argo CD. I've written production code for more than a decade, and I've been building and running
+      multiplayer games since 2018: <strong>Cosmic Realm</strong> reached 3,000 registered accounts and a
+      peak of 200 concurrent players.
+    </p>
+    <p>
+      Today I run <strong>Tidan Games LLC</strong>, where I design and engineer the MMORPG{' '}
+      <strong>Arcana</strong> and operate everything it runs on: game servers, databases, CI/CD, monitoring,
+      email and backups, all on a GitOps-managed cluster. This site is served from that cluster too.
+    </p>
+    <p class="dim">Click a project below to see what I owned and how it works.</p>
+  </section>
+
+  <h2 class="section-title" id="professional">Professional Projects</h2>
+  <hr class="section-rule" />
+  <div class="tiles">
+    {professional.map((p) => <ProjectTile project={p} />)}
+  </div>
+
+  <h2 class="section-title" id="studio">Studio Projects</h2>
+  <hr class="section-rule" />
+  <p class="section-note">
+    Games and infrastructure I design, build and operate myself. Independent since 2018; under
+    Tidan Games LLC since 2026.
+  </p>
+  <div class="tiles">
+    {studio.map((p) => <ProjectTile project={p} />)}
+  </div>
+
+  <h2 class="section-title">Earlier Work</h2>
+  <hr class="section-rule" />
+  <div class="earlier">
+    {earlier.map((p) => (
+      <a href={`/projects/${p.id}`}>
+        <strong>{p.data.title}</strong> <span class="dim">({p.data.dates})</span>
+        <div class="meta">Role: {p.data.role}</div>
+        <div class="meta">Tech: {p.data.tech.join(', ')}</div>
+      </a>
+    ))}
+  </div>
+
+  {posts.length > 0 && (
+    <>
+      <h2 class="section-title">Latest Writing</h2>
+      <hr class="section-rule" />
+      <ul class="posts">
+        {posts.map((post) => (
+          <li>
+            <a href={`/writing/${post.id}`}>
+              <span class="kind">{post.data.kind} · {post.data.date.toISOString().slice(0, 10)}</span>
+              <span class="title">{post.data.title}</span>
+              <span class="dim">{post.data.summary}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</Base>

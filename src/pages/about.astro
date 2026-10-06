@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+
+// Kept in sync with the résumé PDFs by hand. Public page: no phone number or street address.
+const jobs = [
+  {
+    title: 'Site Reliability Engineer Apprentice',
+    org: 'Vail Systems',
+    when: 'Aug 2024 – Present',
+    link: '/projects/vail-sre',
+    points: [
+      'Led the migration of production workloads from AWS ECS/ECR to self-managed Kubernetes (k3s), with Helm and Argo CD GitOps across development, staging and production.',
+      'Rebuilt GitHub Actions delivery for Node.js/Next.js and .NET services: versioned images, database migrations and health checks during releases.',
+      'Deployed and operate Terraform, Ansible, Vault, cert-manager, Harbor, and a Prometheus/Grafana/Loki stack for rollout validation and failure analysis.',
+      'Hardened cluster access with RBAC, namespaced service accounts, network policies, certificate-based SSH, 2FA and host firewalls.',
+      'Containerized C++ services (Make, Conan, GCC) and shipped them through reusable Helm chart templates.',
+      'Mentor Seneca Foundation interns on a k3s training cluster I built and administer.',
+    ],
+  },
+  {
+    title: 'Software Engineer Intern',
+    org: 'Vail Systems',
+    when: 'Mar 2023 – Aug 2024',
+    link: '/projects/vail-software',
+    points: [
+      'Delivered full-stack features weekly in React, TypeScript, Node.js, Express, Prisma and SQL.',
+      'Traced defects across UI, API, database and deployment layers; improved release workflows.',
+    ],
+  },
+  {
+    title: 'Founder',
+    org: 'Tidan Games LLC',
+    when: 'Sep 2026 – Present',
+    link: '/projects/arcana',
+    points: [
+      'Run an independent multiplayer game studio, leading engineers, artists and testers across game servers, clients, APIs, databases and infrastructure.',
+      'Lead engineer and designer of Arcana; operate the studio platform (35 Argo CD applications on k3s).',
+    ],
+  },
+  {
+    title: 'Lead Software Engineer & Owner',
+    org: 'Cosmic Realm',
+    when: 'Nov 2025 – Sep 2026',
+    link: '/projects/cosmic-realm',
+    points: [
+      'Built and operated a C# multiplayer game server: 3,000 registered accounts, 200 peak concurrent players.',
+      'Ran production on k3s with Kustomize and Argo CD, Redis backups three times daily, and Prometheus/Grafana/Loki.',
+    ],
+  },
+  {
+    title: 'Lead Software Engineer & Owner',
+    org: 'Tidan Realms',
+    when: 'Nov 2020 – Sep 2026',
+    link: '/projects/tidan-realms',
+    points: [
+      'C#/.NET MMORPG server with multithreaded game instances and hybrid UDP/TCP networking.',
+      'Player-driven market, Redis caching, and an auto-updating WPF launcher.',
+    ],
+  },
+  {
+    title: 'Software Engineer Apprentice',
+    org: 'Seneca Foundation',
+    when: 'Jul 2022 – Apr 2023',
+    link: '/projects/seneca',
+    points: ['Built full-stack applications with Java, TypeScript and MySQL under senior-engineer mentorship.'],
+  },
+];
+
+const skills = [
+  ['Reliability & platform', 'Kubernetes (k3s), Helm, Kustomize, Argo CD, GitOps, Prometheus, Grafana, Loki, cert-manager, ingress, RBAC, network policies, secrets management'],
+  ['Cloud & automation', 'AWS (ECS, ECR, EC2, IAM, Secrets Manager, Route 53, ACM), Terraform, Ansible, Linux, systemd, SSH'],
+  ['Delivery', 'GitHub Actions, Docker, Podman, Harbor, BuildKit, release engineering'],
+  ['Languages', 'C#, C++, TypeScript, JavaScript, Python, Java, Haxe, Bash, SQL'],
+  ['Software', '.NET, React, Next.js, Node.js, Express, Prisma, REST APIs, WPF/XAML, Haxe/OpenFL'],
+  ['Data', 'PostgreSQL, Redis, MySQL, migrations, connection pooling'],
+  ['Game systems', 'Multiplayer networking (TCP/UDP, WebSockets, binary protocols), multithreading, combat, progression, economies, dungeon and systems design'],
+];
+---
+<Base title="About & Résumé" description="About Rapheal Robinson, site reliability engineer and game developer, with his résumé.">
+  <h1>About</h1>
+  <div class="prose">
+    <p>
+      I'm a site reliability engineer and game developer near Chicago. I started writing code more than a
+      decade ago by making games, and running those games for real players is what pulled me into
+      operations: a multiplayer game is a production service with a very honest user base.
+    </p>
+    <p>
+      At <strong>Vail Systems</strong> I work on the Kubernetes platform and the delivery pipelines that
+      ship to it. At <strong>Tidan Games</strong>, my studio, I design and build Arcana and run the
+      infrastructure behind it. I like owning a system from the first design sketch to the 3 a.m. page,
+      and I write down what I learn, especially when something breaks.
+    </p>
+    <p>
+      I'm a member of the National Society of Black Engineers (NSBE), I'm studying for the Certified
+      Kubernetes Administrator (CKA) exam, and I speak English and Spanish. I'm authorized to work in
+      the U.S. and open to relocation.
+    </p>
+  </div>
+  <div class="actions">
+    <a class="btn" href={`mailto:${SITE.email}`}>Email me</a>
+    <a class="btn btn--ghost" href={SITE.linkedin} rel="me">LinkedIn</a>
+    <a class="btn btn--ghost" href={SITE.github} rel="me">GitHub</a>
+  </div>
+
+  <h2 class="section-title">Résumé</h2>
+  <hr class="section-rule" />
+  <div class="prose">
+    <h2>Experience</h2>
+    {jobs.map((j) => (
+      <div class="resume-job">
+        <h3><a href={j.link}>{j.title}</a> · {j.org}</h3>
+        <div class="when">{j.when}</div>
+        <ul>{j.points.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    ))}
+
+    <h2>Skills</h2>
+    <table>
+      <tbody>
+        {skills.map(([k, v]) => (
+          <tr><th scope="row">{k}</th><td>{v}</td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2>Education & certification</h2>
+    <ul>
+      <li><strong>Associate in Arts, Computer Science</strong>, Prairie State College, Chicago Heights, IL (Jul 2025)</li>
+      <li><strong>Google IT Support Certificate</strong> (May 2026) · <a href="https://credly.com/go/aJ6UHHbO">verify on Credly</a></li>
+      <li><strong>Certified Kubernetes Administrator (CKA)</strong>, in progress</li>
+    </ul>
+  </div>
+</Base>

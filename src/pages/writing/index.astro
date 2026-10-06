@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base title="Writing" description="Postmortems, engineering notes and design write-ups by Rapheal Robinson.">
+  <h1>Writing</h1>
+  <p class="lede">
+    Postmortems, engineering notes and design write-ups from the systems I build and run. Incidents are
+    written blameless-style: what happened, why, what fixed it, and what keeps it from happening again.
+  </p>
+  <ul class="posts">
+    {posts.map((post) => (
+      <li>
+        <a href={`/writing/${post.id}`}>
+          <span class="kind">{post.data.kind} · {post.data.date.toISOString().slice(0, 10)}</span>
+          <span class="title">{post.data.title}</span>
+          <span class="dim">{post.data.summary}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

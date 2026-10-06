@@ -1,0 +1,9 @@
+apiVersion: v2
+name: portfolio
+description: >-
+  rrobinson.me, Rapheal Robinson's portfolio: a static Astro site served by unprivileged
+  nginx. Deployed by the `portfolio` ArgoCD Application in jojobobby/Arcana-Argocd-Apps; CI
+  (.github/workflows/deploy.yml) builds the image and bumps image.tag below.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

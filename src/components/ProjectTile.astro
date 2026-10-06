@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const d = project.data;
+const isSprite = d.cover?.endsWith('.gif');
+---
+<a class="tile" href={`/projects/${project.id}`}>
+  <div class="tile__media">
+    {d.cover ? (
+      <img class={isSprite ? 'pixel' : undefined} src={d.cover} alt={d.coverAlt ?? ''} loading="lazy" decoding="async" />
+    ) : (
+      <div class="cover-card" aria-hidden="true">
+        <span class="cover-card__org">{d.title}</span>
+        <span class="cover-card__tech">{d.tech.slice(0, 3).join(' · ')}</span>
+      </div>
+    )}
+  </div>
+  <div class="tile__body">
+    <span class="tile__role">{d.role}</span>
+    <span class="tile__title">{d.title}</span>
+    <span class="tile__org">{d.org} · {d.dates}</span>
+    <span class="tile__summary">{d.summary}</span>
+  </div>
+</a>
