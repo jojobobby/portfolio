@@ -95,3 +95,35 @@ spec:
                 name: portfolio
                 port:
                   number: 80
+{{- if .Values.wwwRedirect }}
+---
+# www.<host> -> https://<host>, path kept. Its certificate issues once www has a DNS record.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portfolio-www
+  labels:
+    app.kubernetes.io/name: portfolio
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
+    haproxy.org/ssl-redirect: "true"
+    haproxy.org/request-redirect: {{ .Values.host | quote }}
+    haproxy.org/request-redirect-code: "301"
+spec:
+  ingressClassName: haproxy
+  tls:
+    - hosts:
+        - www.{{ .Values.host }}
+      secretName: www.{{ .Values.tlsSecret }}
+  rules:
+    - host: www.{{ .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+{{- end }}

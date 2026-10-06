@@ -3,25 +3,29 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+  const rank = { professional: 0, studio: 1, earlier: 2 };
+  const projects = (await getCollection('projects')).sort(
+    (a, b) => rank[a.data.section] - rank[b.data.section] || a.data.order - b.data.order,
+  );
+  return projects.map((project, i) => ({
+    params: { id: project.id },
+    props: { project, prev: projects[i - 1], next: projects[i + 1] },
+  }));
 }
 
-const { project } = Astro.props;
+const { project, prev, next } = Astro.props;
 const d = project.data;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
+const toc = headings.filter((h) => h.depth === 2);
 const related = (await getCollection('writing')).filter((w) => w.data.project === project.id);
-const showHero = d.cover && !d.cover.endsWith('.gif');
+const showHero = d.cover && /\.(jpe?g|png|webp)$/i.test(d.cover);
 ---
 <Base title={d.title} description={d.summary}>
   <p><a href="/">← All projects</a></p>
   <header class="project-head">
     <span class="tile__role">{d.role}</span>
     <h1>{d.title}</h1>
-    <span class="dim">{d.org} · {d.dates}</span>
-    {d.tech.length > 0 && (
-      <div class="facts">{d.tech.map((t) => <span class="chip">{t}</span>)}</div>
-    )}
+    <p class="lede">{d.summary}</p>
   </header>
 
   {showHero && (
@@ -41,24 +45,56 @@ const showHero = d.cover && !d.cover.endsWith('.gif');
     </div>
   )}
 
-  <article class="prose">
-    <Content />
-  </article>
+  <div class="project-layout">
+    <article class="prose">
+      <Content />
 
-  {related.length > 0 && (
-    <section>
-      <h2>Related writing</h2>
-      <ul class="posts">
-        {related.map((post) => (
-          <li>
-            <a href={`/writing/${post.id}`}>
-              <span class="kind">{post.data.kind}</span>
-              <span class="title">{post.data.title}</span>
-              <span class="dim">{post.data.summary}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+      {related.length > 0 && (
+        <section>
+          <h2>Related writing</h2>
+          <ul class="posts">
+            {related.map((post) => (
+              <li>
+                <a href={`/writing/${post.id}`}>
+                  <span class="kind">{post.data.kind}</span>
+                  <span class="title">{post.data.title}</span>
+                  <span class="dim">{post.data.summary}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </article>
+
+    <aside class="glance" aria-label="At a glance">
+      <dl>
+        <dt>Role</dt><dd>{d.role}</dd>
+        <dt>Where</dt><dd>{d.org}</dd>
+        <dt>When</dt><dd>{d.dates}</dd>
+        {d.tech.length > 0 && (<><dt>Stack</dt><dd><div class="facts">{d.tech.map((t) => <span class="chip">{t}</span>)}</div></dd></>)}
+        {toc.length > 1 && (
+          <>
+            <dt>On this page</dt>
+            <dd><ul class="toc">{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></dd>
+          </>
+        )}
+      </dl>
+    </aside>
+  </div>
+
+  <nav class="pager" aria-label="More projects">
+    {prev && (
+      <a href={`/projects/${prev.id}`}>
+        <span class="dir">← Previous</span>
+        <div><strong>{prev.data.title}</strong></div>
+      </a>
+    )}
+    {next && (
+      <a class="next" href={`/projects/${next.id}`}>
+        <span class="dir">Next →</span>
+        <div><strong>{next.data.title}</strong></div>
+      </a>
+    )}
+  </nav>
 </Base>

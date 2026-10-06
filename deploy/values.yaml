@@ -10,6 +10,8 @@ replicas: 2
 host: rrobinson.me
 tlsSecret: rrobinson.me-tls
 clusterIssuer: letsencrypt-prod
+# Also answer www.<host> with a redirect to <host> (needs a www DNS record).
+wwwRedirect: true
 
 resources:
   requests:

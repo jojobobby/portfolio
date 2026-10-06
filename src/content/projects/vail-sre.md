@@ -7,6 +7,8 @@ section: professional
 order: 1
 summary: Led the move of production workloads from AWS ECS to a self-managed k3s platform, with GitOps delivery, observability and hardened access.
 tech: [Kubernetes (k3s), Helm, Argo CD, GitHub Actions, Terraform, Ansible, Harbor, Vault, cert-manager, Prometheus, Grafana, Loki, AWS]
+cover: /media/covers/vail-sre.svg
+coverAlt: "Illustration: containers moving from AWS ECS to a k3s cluster managed by Argo CD"
 stats:
   - { value: 'ECS → k3s', label: 'production platform migration' }
   - { value: '3 envs', label: 'development, staging, production' }

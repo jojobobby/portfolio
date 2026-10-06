@@ -7,6 +7,8 @@ section: studio
 order: 3
 summary: My first game, started in 2018 as Tidan's Realm and renamed Cosmic Realm in 2020. A live multiplayer game I built and ran for eight years, from the C# server to Kubernetes.
 tech: [C#, .NET, ActionScript 3, Adobe AIR, Redis, UDP/TCP, WPF, Docker, GitHub Actions, k3s, Argo CD, Prometheus, Grafana, Loki, Stripe]
+cover: /media/covers/cosmic-realm.svg
+coverAlt: "Illustration: a ringed planet in a starfield, labelled 2018 to 2026"
 stats:
   - { value: '3,000', label: 'registered accounts' }
   - { value: '200', label: 'peak concurrent players' }

@@ -2,30 +2,104 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectTile from '../components/ProjectTile.astro';
+import { SITE } from '../site';
 
 const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const professional = all.filter((p) => p.data.section === 'professional');
 const studio = all.filter((p) => p.data.section === 'studio');
 const earlier = all.filter((p) => p.data.section === 'earlier');
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+
+// Verified numbers only: live systems (Oct 2026), git history, or the résumé.
+const numbers = [
+  { value: '8 yrs', label: 'building and running multiplayer games' },
+  { value: '818', label: 'player accounts on Arcana today' },
+  { value: '35', label: 'services I run with GitOps' },
+  { value: 'ECS → k3s', label: 'production migration I led at Vail' },
+];
+
+// Milestones from the résumés and git history; the game lineage is the owner's own account.
+const timeline = [
+  { year: '2018', title: "Tidan's Realm", text: 'My first game: a private server with my own items, sprites and quests.', href: '/projects/cosmic-realm' },
+  { year: '2020', title: 'Cosmic Realm', text: "Tidan's Realm becomes Cosmic Realm, which I build and run for six more years.", href: '/projects/cosmic-realm' },
+  { year: '2022', title: 'Seneca Foundation', text: 'First engineering role: a full-stack apprenticeship.', href: '/projects/seneca' },
+  { year: '2023', title: 'Vail Systems', text: 'Software engineer on in-house products: React, Node.js, SQL.', href: '/projects/vail-software' },
+  { year: '2024', title: 'Site reliability', text: 'SRE apprentice at Vail. I lead the move from AWS ECS to Kubernetes.', href: '/projects/vail-sre' },
+  { year: '2025', title: 'Associate degree', text: 'Associate in Arts in Computer Science, Prairie State College.', href: '/about' },
+  { year: '2026', title: 'Tidan Games LLC', text: "I found the studio. Tidan's Realm VI becomes Arcana, on a platform I run.", href: '/projects/arcana' },
+];
 ---
 <Base>
-  <section class="intro">
-    <p><strong>Hello, and welcome to my portfolio!</strong></p>
-    <p>
-      I'm a site reliability engineer at <strong>Vail Systems</strong>, where I led the migration of
-      production workloads from AWS ECS to a self-managed Kubernetes platform built on k3s, Helm and
-      Argo CD. I've written production code for more than a decade, and I've been building and running
-      multiplayer games since 2018: <strong>Cosmic Realm</strong> reached 3,000 registered accounts and a
-      peak of 200 concurrent players.
-    </p>
-    <p>
-      Today I run <strong>Tidan Games LLC</strong>, where I design and engineer the MMORPG{' '}
-      <strong>Arcana</strong> and operate everything it runs on: game servers, databases, CI/CD, monitoring,
-      email and backups, all on a GitOps-managed cluster. This site is served from that cluster too.
-    </p>
-    <p class="dim">Click a project below to see what I owned and how it works.</p>
+  <section class="hero">
+    <div class="hero__text">
+      <p class="eyebrow">Hi, I'm Rapheal.</p>
+      <h1 class="hero__title">I build multiplayer games <span class="accent">and the infrastructure they run on.</span></h1>
+      <p class="lede">
+        Site reliability engineer at <strong>Vail Systems</strong> and founder of <strong>Tidan Games</strong>,
+        where I design and engineer the MMORPG <strong>Arcana</strong>. Kubernetes, GitOps and observability
+        by day; game servers, dungeons and live players since 2018.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#studio">See my work</a>
+        <a class="btn btn--ghost" href="/about">Résumé</a>
+        <a class="btn btn--ghost" href={`mailto:${SITE.email}`}>Email me</a>
+      </div>
+    </div>
+    <a class="hero__art" href="/projects/arcana" aria-label="Arcana project">
+      <img class="hero__shot" src="/media/arcana/main-menu.jpg" alt="Arcana's main menu: a pixel-art forest behind the game's title" />
+      <img class="hero__sprite hero__sprite--a" src="/media/arcana/mysterious-merchant-greet.gif" alt="" />
+      <img class="hero__sprite hero__sprite--b" src="/media/arcana/sandsurge-behemoth-rise.gif" alt="" />
+      <span class="hero__caption">Arcana · my studio's MMORPG</span>
+    </a>
   </section>
+
+  <section class="numbers" aria-label="At a glance">
+    {numbers.map((n) => (
+      <div class="number">
+        <div class="number__value">{n.value}</div>
+        <div class="number__label">{n.label}</div>
+      </div>
+    ))}
+  </section>
+
+  <section class="duo" aria-label="What I do">
+    <div class="duo__card">
+      <h2>Reliability engineering</h2>
+      <p class="dim">Keeping services up, shippable and observable.</p>
+      <ul>
+        <li>Kubernetes (k3s), Helm and Argo CD GitOps</li>
+        <li>CI/CD with GitHub Actions, Harbor and rootless image builds</li>
+        <li>Prometheus, Grafana and Loki for rollouts and incidents</li>
+        <li>Access hardening: RBAC, network policies, secrets management</li>
+      </ul>
+      <a href="/projects/vail-sre">Kubernetes migration at Vail →</a>
+    </div>
+    <div class="duo__card">
+      <h2>Game development</h2>
+      <p class="dim">Designing systems players love and building them end to end.</p>
+      <ul>
+        <li>C#/.NET game servers: networking, persistence, economies</li>
+        <li>Dungeons, PvP rules and progression systems</li>
+        <li>Native Haxe/OpenFL client and an auto-updating launcher</li>
+        <li>Live operations for real player communities</li>
+      </ul>
+      <a href="/projects/arcana">Arcana case study →</a>
+    </div>
+  </section>
+
+  <h2 class="section-title">Career Timeline</h2>
+  <hr class="section-rule" />
+  <ol class="timeline">
+    {timeline.map((t) => (
+      <li class="timeline__item">
+        <a href={t.href}>
+          <span class="timeline__year">{t.year}</span>
+          <span class="timeline__title">{t.title}</span>
+          <span class="timeline__text">{t.text}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
 
   <h2 class="section-title" id="professional">Professional Projects</h2>
   <hr class="section-rule" />
@@ -36,7 +110,7 @@ const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueO
   <h2 class="section-title" id="studio">Studio Projects</h2>
   <hr class="section-rule" />
   <p class="section-note">
-    Games and infrastructure I design, build and operate myself. Independent since 2018; under
+    Games and infrastructure I design, build and operate myself: independent since 2018, under
     Tidan Games LLC since 2026.
   </p>
   <div class="tiles">
@@ -72,4 +146,13 @@ const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueO
       </ul>
     </>
   )}
+
+  <section class="cta">
+    <h2>Hiring for SRE, platform or game engineering?</h2>
+    <p class="dim">I'm open to relocation and happy to walk through any of this work in detail.</p>
+    <div class="actions">
+      <a class="btn" href={`mailto:${SITE.email}`}>Get in touch</a>
+      <a class="btn btn--ghost" href={SITE.linkedin} rel="me">LinkedIn</a>
+    </div>
+  </section>
 </Base>

@@ -7,6 +7,8 @@ section: studio
 order: 2
 summary: The self-hosted production platform behind my games and studio. Kubernetes managed entirely through GitOps, with data services, observability, email, backups and CI built in.
 tech: [k3s, Argo CD, Helm, HAProxy, cert-manager, CloudNativePG, Redis, OpenBao, Prometheus, Grafana, Loki, GitHub Actions, BuildKit]
+cover: /media/covers/tidan-platform.svg
+coverAlt: "Illustration: GitHub feeding Argo CD, which runs games, data services and operations on one cluster"
 stats:
   - { value: '35', label: 'Argo CD applications' }
   - { value: '130+', label: 'running pods on one node' }

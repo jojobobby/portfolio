@@ -7,6 +7,8 @@ section: professional
 order: 2
 summary: Shipped full-stack features weekly in React, Node.js, Prisma and SQL, and traced production failures across every layer of the stack.
 tech: [React, TypeScript, Node.js, Express, Prisma, SQL, Docker, REST APIs]
+cover: /media/covers/vail-software.svg
+coverAlt: "Illustration: a code editor with a TypeScript data-access function"
 ---
 
 Before moving into reliability engineering, I worked on Vail Systems' in-house applications as a
