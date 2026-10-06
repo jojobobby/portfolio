@@ -2,7 +2,7 @@
 title: Auto-updating Windows Game Launcher
 org: Independent
 role: Developer
-dates: Tidan Realms & Arcana
+dates: Cosmic Realm & Arcana
 section: earlier
 order: 10
 summary: A WPF launcher that checks versions, downloads and unpacks updates in the background, and starts the game.

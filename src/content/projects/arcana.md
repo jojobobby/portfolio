@@ -2,7 +2,7 @@
 title: Arcana
 org: Tidan Games LLC
 role: Founder · Lead Engineer & Game Designer
-dates: 2021 – Present
+dates: 2023 – Present
 section: studio
 order: 1
 summary: A pixel-art MMORPG with a .NET game server and a native Haxe client. I design its systems and dungeons, write the server and client, and run its production.
@@ -10,7 +10,8 @@ tech: [C# / .NET 9, Haxe / OpenFL, hxcpp, PostgreSQL, Redis, ASP.NET Core, Kuber
 cover: /media/arcana/main-menu.jpg
 coverAlt: Arcana's Windows client at its main menu, a pixel-art forest behind the title and menu buttons
 stats:
-  - { value: '3,000+', label: 'commits since May 2021' }
+  - { value: '818', label: 'player accounts in production (Oct 2026)' }
+  - { value: '2,000+', label: 'of my commits in its history' }
   - { value: '~2,470', label: 'automated test cases' }
   - { value: '200–500', label: 'unique playtesters over the project' }
   - { value: '1 commit', label: 'builds client, server and website together' }
@@ -19,6 +20,11 @@ stats:
 Arcana is a real-time multiplayer action RPG: dungeons, a shared overworld, guilds, trading,
 crafting and PvP. I lead it end to end. I design the systems and content, write the game server
 and the client, and operate the infrastructure it runs on.
+
+**Where it came from.** Arcana started as a fork of *Cosmic v2*, a game by another developer
+(09DZL), worked on with xDelik. A different game from my own [Cosmic Realm](/projects/cosmic-realm).
+I forked it as **Tidan's Realm**, developed it into **Tidan's Realm VI** (the name still on its
+client, below), and renamed it **Arcana** when I founded Tidan Games LLC in September 2026.
 
 ## The game
 
