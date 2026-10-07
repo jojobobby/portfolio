@@ -78,6 +78,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
     haproxy.org/ssl-redirect: "true"
+    # Permanent, so browsers and search engines remember the HTTPS address.
+    haproxy.org/ssl-redirect-code: "301"
 spec:
   ingressClassName: haproxy
   tls:
