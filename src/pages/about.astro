@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
+import SkillYears from '../components/SkillYears.astro';
 
 // Built from my four résumés. Public page: no phone number or street address.
 type Entry = {
@@ -140,7 +141,7 @@ const independent: Entry[] = [
   {
     title: 'Game infrastructure and operations',
     org: 'Cosmic Realm and Arcana',
-    when: '2020 to Present',
+    when: '2024 to Present',
     link: '/projects/tidan-platform',
     points: [
       'Deployed and maintained game services on k3s with Helm, Argo CD, GitHub Actions and container registries, with separate testing and production environments.',
@@ -155,7 +156,7 @@ const independent: Entry[] = [
   {
     title: 'Windows launcher engineering',
     org: 'Cosmic Realm and Arcana',
-    when: '2020 to Present',
+    when: '2023 to Present',
     link: '/projects/windows-launcher',
     points: [
       'Developed and maintained auto-updating Windows game launchers in C#, WPF and XAML, starting on .NET Framework 4.8.',
@@ -173,17 +174,6 @@ const independent: Entry[] = [
   },
 ];
 
-const skills = [
-  ['Languages and web', 'C# (since 2018), C++, TypeScript, JavaScript, Java, Python, Bash, SQL; React, Next.js, Node.js, Express, HTML5, CSS, REST APIs'],
-  ['.NET', '.NET Framework 4.6 to .NET 10, ASP.NET Core, Razor Pages, Blazor, WPF/XAML, MonoGame, LINQ, spans, prometheus-net, NUnit, xUnit'],
-  ['Containers and delivery', 'Kubernetes (k3s), Helm, Kustomize, Argo CD, GitOps, GitHub Actions, Git, Docker, Podman, Podman Compose, Harbor, BuildKit'],
-  ['Cloud and automation', 'AWS (ECS, ECR, EC2, IAM, Secrets Manager, Route 53, ACM, security groups), Terraform, Ansible, Linux, systemd, SSH'],
-  ['Reliability and networking', 'Grafana, Loki, Prometheus, ingress, Caddy, MetalLB, cert-manager, TLS, RBAC, service accounts, secrets, network policies, health checks, rollout investigation, incident investigation, high availability design, capacity and cost optimization, production operations for live services, Cilium and Calico troubleshooting'],
-  ['Data and persistence', 'PostgreSQL, Redis, MySQL, SQL, Prisma, ORMs, connection pooling, database migrations, PVCs, CronJobs'],
-  ['Client and systems', 'ActionScript 3, Adobe AIR, Haxe/OpenFL, Lime, hxcpp, WPF/XAML, Conan, TCP/UDP, WebSockets, binary serialization, multithreading, Vim'],
-  ['Game systems', 'Multiplayer networking, combat, progression, economies, dungeon and systems design, playtesting'],
-  ['Leadership', 'Team leadership across engineering, art, design, QA and audio; intern mentorship and training environments; roadmap prioritization from player feedback; cross-functional delivery; code review'],
-];
 ---
 <Base title="About & Résumé" description="About Rapheal Robinson, site reliability engineer and game developer, with his résumé.">
   <h1>About</h1>
@@ -250,13 +240,8 @@ const skills = [
     ))}
 
     <h2>Skills</h2>
-    <table>
-      <tbody>
-        {skills.map(([k, v]) => (
-          <tr><th scope="row">{k}</th><td>{v}</td></tr>
-        ))}
-      </tbody>
-    </table>
+    <p class="dim">Years worked with each one, from the first year I can show I used it.</p>
+    <SkillYears />
 
     <h2>Education, certification and affiliation</h2>
     <ul>

@@ -1,0 +1,35 @@
+---
+// Skills as years worked, not a flat list. A bar shows how long each one has been in use,
+// measured from the first year there is evidence for it (see src/data/skills.ts).
+import { skillGroups, alsoUsed, FIRST_YEAR } from '../data/skills';
+
+const NOW = new Date().getFullYear();
+const span = NOW - FIRST_YEAR;
+
+const years = (since: number) => Math.max(0, NOW - since);
+const label = (since: number) => (years(since) < 1 ? 'this year' : `${years(since)} ${years(since) === 1 ? 'yr' : 'yrs'}`);
+---
+<div class="skills">
+  {skillGroups.map((g) => (
+    <section class="skills__group">
+      <h3 class="skills__name">{g.name}</h3>
+      <ul class="skills__list">
+        {[...g.items].sort((a, b) => a.since - b.since || a.name.localeCompare(b.name)).map((s) => (
+          <li class="skill">
+            <span class="skill__name">{s.name}</span>
+            <span class="skill__bar" role="img" aria-label={`${label(s.since)}, since ${s.since}`}>
+              <span class="skill__fill" style={`width:${Math.max(4, Math.round((years(s.since) / span) * 100))}%`}></span>
+            </span>
+            <span class="skill__years">{label(s.since)}{years(s.since) >= 1 && <span class="skill__since"> since {s.since}</span>}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  {alsoUsed.length > 0 && (
+    <section class="skills__group skills__also">
+      <h3 class="skills__name">Also worked with</h3>
+      <p>{alsoUsed.join(', ')}</p>
+    </section>
+  )}
+</div>

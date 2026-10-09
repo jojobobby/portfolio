@@ -353,3 +353,26 @@ p, li { color: var(--text); }
 .tile__code .add, .code-figure .add { color: #7ee2a8; background: rgba(46, 160, 67, 0.15); }
 .tile__code .del, .code-figure .del { color: #ff9b9b; background: rgba(248, 81, 73, 0.15); }
 .tile__code pre span, .code-figure pre span { display: block; }
+
+/* ---- Skills as years worked ---- */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; margin: 14px 0 6px; }
+.skills__group { min-width: 0; }
+.skills__name { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--warm); margin: 0 0 8px; }
+.prose .skills__list, .skills__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.skills__list li { margin: 0; padding: 0; }
+.skill { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) 9.2rem; align-items: center; gap: 10px; font-size: 0.92rem; }
+.skill__name { color: var(--text); overflow-wrap: anywhere; }
+.skill__bar { height: 7px; border-radius: 999px; background: var(--bg-sunken); border: 1px solid var(--line); overflow: hidden; }
+.skill__fill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-strong, var(--accent))); }
+.skill__years { font-family: var(--mono); font-size: 0.8rem; color: var(--text); text-align: right; white-space: nowrap; }
+.skill__since { color: var(--text-dim); }
+.skills__also { grid-column: 1 / -1; }
+.skills__also p { margin: 0; color: var(--text-dim); font-size: 0.92rem; }
+@media (max-width: 900px) {
+  .skills { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .skill { grid-template-columns: minmax(0, 1fr) auto; row-gap: 4px; }
+  .skill__bar { grid-column: 1 / -1; order: 3; }
+  .skill__since { display: none; }
+}
