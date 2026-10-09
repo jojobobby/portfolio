@@ -29,7 +29,8 @@ api:
   # Out-of-band Secret: DATABASE_URL, ADMIN_TOKEN (secret.example.yaml)
   existingSecret: portfolio-api
   youtubeHandle: "@RalphOfc"
-  smtpHost: mail.mail.svc
+  # Submission to the inbox server as noreply@ (SMTP_USER/SMTP_PASS in the Secret).
+  smtpHost: inbox.inbox.svc
   mailFrom: "Rapheal Robinson <noreply@tidangames.com>"
   resources:
     requests: { cpu: 10m, memory: 64Mi }

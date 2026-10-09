@@ -46,4 +46,5 @@ npm run build    # static site in dist/
   upload date and thumbnail (never the video). The Videos page reads `/api/videos`.
 - **Moderation:** `curl -X DELETE -H "Authorization: Bearer $ADMIN_TOKEN" https://rrobinson.me/api/comments/<id>`
 
-Secret `portfolio-api` (namespace `portfolio`, out of band): `DATABASE_URL`, `ADMIN_TOKEN`.
+Secret `portfolio-api` (namespace `portfolio`, out of band): `DATABASE_URL`, `ADMIN_TOKEN`,
+`SMTP_USER` (noreply@tidangames.com) and `SMTP_PASS` (that mailbox's password).

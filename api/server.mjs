@@ -18,7 +18,10 @@ const mailer = nodemailer.createTransport({
   port: Number(process.env.SMTP_PORT || 587),
   secure: false,
   name: 'rrobinson.me', // HELO must be a full domain name
-  tls: { rejectUnauthorized: false }, // in-cluster relay
+  tls: { rejectUnauthorized: false }, // in-cluster hop; the public side has a real certificate
+  // Authenticated submission to the inbox server: it delivers @tidangames.com mail itself and
+  // relays the rest. (The send-only relay refuses mail for our own domain as a loop.)
+  ...(process.env.SMTP_USER ? { auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } } : {}),
 });
 const FROM = process.env.MAIL_FROM || 'Rapheal Robinson <noreply@tidangames.com>';
 
