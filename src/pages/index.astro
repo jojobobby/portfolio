@@ -47,24 +47,6 @@ const numbers = [
   <hr class="section-rule" />
   <div class="tiles">{studio.map((p) => <ProjectTile project={p} />)}</div>
 
-  <div class="section-head">
-    <h2 class="section-title" id="videos">Videos</h2>
-    <a class="section-more" href="/videos">Show more</a>
-  </div>
-  <hr class="section-rule" />
-  <div class="vids">
-    {videos.map((v) => (
-      <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
-        <span class="vid__thumb">
-          <img src={`/media/yt/${v.id}.jpg`} alt="" loading="lazy" decoding="async" />
-          <span class="play" aria-hidden="true">▶</span>
-        </span>
-        <span class="vid__title">{v.title}</span>
-        <span class="vid__date">{stamp(v.date)}</span>
-      </a>
-    ))}
-  </div>
-
   <h2 class="section-title" id="professional">Professional</h2>
   <hr class="section-rule" />
   <div class="tiles">{professional.map((p) => <ProjectTile project={p} />)}</div>
@@ -87,6 +69,24 @@ const numbers = [
       <li><a href={`/writing/${post.id}`}><span class="kind">{post.data.kind}{post.data.tag ? ` ${post.data.tag}` : ''}</span><span class="title">{post.data.title}</span></a></li>
     ))}
   </ul>
+
+  <div class="section-head">
+    <h2 class="section-title" id="videos">Videos</h2>
+    <a class="section-more" href="/videos">Show more</a>
+  </div>
+  <hr class="section-rule" />
+  <div class="vids">
+    {videos.map((v) => (
+      <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
+        <span class="vid__thumb">
+          <img src={`/media/yt/${v.id}.jpg`} alt="" loading="lazy" decoding="async" />
+          <span class="play" aria-hidden="true">▶</span>
+        </span>
+        <span class="vid__title">{v.title}</span>
+        <span class="vid__date">{stamp(v.date)}</span>
+      </a>
+    ))}
+  </div>
 
   <p class="contact">
     <a href={`mailto:${SITE.email}`}>{SITE.email}</a>

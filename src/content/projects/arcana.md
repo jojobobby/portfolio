@@ -6,7 +6,7 @@ dates: 2023 to Present
 section: studio
 order: 1
 summary: A pixel-art MMORPG. I design it, build it and run it.
-tech: [C# / .NET 9, Haxe / OpenFL, PostgreSQL, Redis, Kubernetes, Argo CD]
+tech: [C# / .NET 10, ASP.NET Core, WPF / XAML, Haxe / OpenFL, PostgreSQL, Redis, Kubernetes, Argo CD]
 cover: /media/arcana/main-menu.jpg
 coverAlt: Arcana's main menu
 video: hUZl8HxzW1o
@@ -28,6 +28,17 @@ client, design the content, and run it in production.
   protection, and a fight tag stops you escaping mid-fight.
 - **Allies:** summons, turrets and pets share one system, and you choose whose you see.
 - **Enemy levels:** each enemy gets a level and a rank, and one formula sets its stats.
+
+## C# and .NET
+
+- **Game server** on .NET 10, running at 10 ticks a second.
+- **Account and game APIs** in the same process, plus a website and balance tool in ASP.NET Core
+  Razor Pages.
+- **Launcher** in WPF and XAML, with checked downloads and self-updates.
+- **Metrics and logs**: Prometheus and Grafana, a tick profiler, and logs split by category.
+- Case study: [a list of 52,000 enemies froze the server](/writing/list-that-froze-the-server).
+
+More on [my C# and .NET work](/projects/csharp-dotnet).
 
 ## More videos
 
