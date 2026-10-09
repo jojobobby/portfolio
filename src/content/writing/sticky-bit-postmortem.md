@@ -7,33 +7,33 @@ summary: A support desk 500 caused by hardening one thing too far.
 project: tidan-platform
 ---
 
-**Impact:** the studio's new support desk (Zammad) returned HTTP 500 while its first admin was
-connecting an email account in the setup wizard. Nothing else was affected, and no data was lost.
+**Impact:** the studio's new support desk (Zammad) returned HTTP 500 when its first admin
+connected an email account in the setup wizard. Nothing else broke and no data was lost.
 Time to fix, once reported: about ten minutes.
 
 ## Background
 
-When I deployed the support desk from its official Helm chart, I turned off one of the chart's
-init containers. It ran **privileged, as root**, and all it did was `chmod` a temporary
-directory, an `emptyDir` volume. My reasoning: the pod already sets an `fsGroup`, so the
+I deployed the support desk from its official Helm chart and turned off one of its init
+containers. It ran **privileged, as root**, and all it did was `chmod` a temporary
+directory (an `emptyDir` volume). My reasoning: the pod already sets an `fsGroup`, so the
 directory is writable by the app's group, and a privileged container on a shared node is a real
-risk. The deployment came up healthy, and every page returned 200.
+risk. The deployment came up healthy and every page returned 200.
 
 ## What happened
 
-1. The admin went through the setup wizard and reached the step that connects an email inbox.
+1. The admin reached the step in the setup wizard that connects an email inbox.
 2. That step failed with HTTP 500.
 3. The server log showed one line: `ArgumentError: could not find a temporary directory`.
 
 ## Root cause
 
 Kubernetes creates an `emptyDir` with mode `0777`, and with `fsGroup` set it becomes `2777`:
-world-writable, with **no sticky bit**. Zammad runs on Ruby, and Ruby's `Dir.tmpdir` deliberately
+world-writable, with **no sticky bit**. Zammad runs on Ruby, and Ruby's `Dir.tmpdir`
 refuses a world-writable directory without the sticky bit, because any user could delete or swap
 another user's temporary files there. With no acceptable temp directory, any request that needed
-a temporary file failed. Email setup was simply the first one.
+a temporary file failed. Email setup was just the first one.
 
-The init container I'd removed was the fix for exactly this: it ran `chmod 770` on the
+The init container I removed was the fix for exactly this. It ran `chmod 770` on the
 directory.
 
 ## Why it got past me
@@ -44,9 +44,9 @@ proved the app started, not that it worked.
 ## Fix
 
 I put the init container back, but not as upstream wrote it. Changing permissions on a
-directory you own needs no special capability, and the `emptyDir` is owned by root, so the
-container now runs as root with **every capability dropped**, not privileged and with no
-privilege escalation. The directory is `770` again, and the error is gone.
+directory you own needs no special capability, and root owns the `emptyDir`. So the
+container now runs as root with **every capability dropped**: not privileged, no privilege
+escalation. The directory is `770` again and the error is gone.
 
 ```yaml
 volumePermissions:
@@ -61,7 +61,7 @@ volumePermissions:
 ## A second finding from the same review
 
 While debugging, I noticed the chart's setup Job deleted itself five minutes after finishing,
-and Argo CD, seeing a tracked resource missing, recreated it. The app's full setup routine had
+and Argo CD saw the missing tracked resource and recreated it. The app's full setup routine had
 been re-running every few minutes since deploy. Making the Job an Argo CD **Sync hook** means
 it runs once per change instead of forever.
 

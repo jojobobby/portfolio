@@ -10,17 +10,17 @@ project: arcana
 Every feature you add makes the game a little harder to learn. Add enough of them at the
 start and new players never get past the first hour.
 
-Players enjoy simplicity, until they hit a wall. That's the moment complexity is welcome.
-When someone has mastered the basics and wants more, a new system feels like a reward. Show
-the same system on day one and it's just another menu they don't understand.
+Players like simplicity until they hit a wall. That's when complexity is welcome. Once
+someone has mastered the basics and wants more, a new system feels like a reward. Show the
+same system on day one and it's just another menu they don't understand.
 
-That's why complex games feel overwhelming from the start, and why good designers roll
-features out over time, gated by things like account level or player level.
+That's why complex games feel overwhelming at the start, and why good designers roll
+features out over time, gated by account level or player level.
 
 ## Gating is a feature
 
-Locking content behind time or progression gets treated like a negative. I think it's one
-of the best tools you have.
+Locking content behind time or progression gets treated as a negative. I think it's one of
+the best tools you have.
 
 - **It teaches one thing at a time.** Each system arrives when the player is ready for it.
 - **It gives the game a second wind.** The best feeling is unlocking something new right when
@@ -32,8 +32,8 @@ of the best tools you have.
 ## How I'd roll it out
 
 Start with the core loop and nothing else: move, fight, loot. Get that feeling great. Then
-watch the metrics. When players start finishing everything and the session length drops,
-that's when the next system unlocks. Arcana already gates parts of the game by level, and
+watch the metrics. When players start finishing everything and session length drops,
+unlock the next system. Arcana already gates parts of the game by level, and
 every new system has to earn its place the same way.
 
 A game doesn't need more features. It needs the right feature at the right time.

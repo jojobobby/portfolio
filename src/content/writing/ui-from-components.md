@@ -8,7 +8,7 @@ project: arcana
 ---
 
 UI is one of the top reasons a game thrives or fails. Players forgive a lot, but not a menu
-that fights them. It took me years to learn how to build it well.
+that fights them. It took me years to learn to build it well.
 
 ## 2018 to 2022: every screen by hand
 
@@ -38,12 +38,12 @@ addRewards();
 addPurchaseButton();
 ```
 
-It wasn't pretty, but it got the job done, and every new screen came out consistent.
+It wasn't pretty, but it worked, and every new screen came out consistent.
 
 ## 2026: a real system, with an artist
 
-In September 2026 I spent 20 days redesigning and restructuring the whole UI infrastructure,
-with new UI art from afentis:
+In September 2026 I spent 20 days redesigning the whole UI infrastructure, with new art from
+afentis:
 
 - **A few building blocks.** Everything compiles down to the same small set of components:
   `button`, `input_text`, and bigger ones like `window` for building screens quickly.
@@ -68,5 +68,4 @@ against those rules.
 - Make variations cheap, so players can pick instead of you guessing.
 - Write the rules down and check them with a tool, not by memory.
 
-The same idea carried into everything else I build, like the launcher and the websites. Small
-parts, used everywhere.
+I use the same idea in the launcher and the websites.

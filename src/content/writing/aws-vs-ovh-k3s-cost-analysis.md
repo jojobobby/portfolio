@@ -3,14 +3,13 @@ title: 'AWS vs OVH costs'
 date: 2026-08-30
 kind: engineering
 tag: consideration
-summary: What a k3s cluster costs on AWS and OVH, over 1 year and 10.
+summary: What a k3s cluster costs on AWS and OVH, over 1 year and over 10.
 project: kubernetes-platform
 ---
 
-When Seneca Foundation's Kubernetes cluster needed a long-term home, I wrote a technical and
-financial analysis comparing **AWS** and **OVHcloud** for running it. This is that analysis.
-The 12-month numbers are from my report (Aug 30, 2026). The 10-year table extends them in a
-straight line at today's prices.
+Seneca Foundation's Kubernetes cluster needed a long-term home, so I compared **AWS** and
+**OVHcloud** for running it. The 12-month numbers are from my report (Aug 30, 2026). The
+10-year table extends them in a straight line at today's prices.
 
 ## The requirement
 
@@ -33,8 +32,7 @@ Provisioning is automated either way:
 | Medium | m5.large (2 vCPU, 8 GB) | $70.08 | Rise-1 (6 cores, 32 GB) | $65.00 |
 | High-performance | c6g.2xlarge (8 vCPU, 16 GB) | $245.28 | Advance-3 (12 cores, 64 GB) | $145.00 |
 
-On compute alone the gap is modest at the medium tier. The real difference is everything
-around compute.
+At the medium tier the compute gap is modest. The real difference is everything around it.
 
 ## Storage and networking decide it
 
@@ -81,6 +79,6 @@ about $624 a year, or $6,240 over ten.
 ## Where AWS still wins
 
 AWS has the broader ecosystem: managed databases, IAM, and services you'd otherwise build
-yourself. And Reserved Instances can bring its compute price down. For a single-node cluster
-with heavy storage and public traffic, though, the usage-based storage and egress pricing
-outweighs those advantages.
+yourself. Reserved Instances can also lower its compute price. For a single-node cluster with
+heavy storage and public traffic, the usage-based storage and egress pricing still outweighs
+that.

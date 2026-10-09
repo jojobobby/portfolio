@@ -8,9 +8,9 @@ project: kubernetes-platform
 ---
 
 Seneca Foundation runs an apprenticeship where new engineers build and ship real
-applications. Over two years I deployed those applications five different ways. Not because
-the earlier ways were wrong, but because each time the scope grew, the old architecture stopped
-fitting. This is the path, with dates from the git history.
+applications. Over two years I deployed those applications five different ways. The earlier
+ways weren't wrong. Each time the scope grew, the old setup stopped fitting. Here is the path,
+with dates from the git history.
 
 ## 1. Containers on a server: `docker compose` and `podman compose` (2024)
 
@@ -38,14 +38,14 @@ task definitions. Dev Landing followed (merged December 2024). Through 2025, the
 into **test-before-deploy** workflows with the deployment configuration kept **in the repo**, and
 a shared deploy template so every project shipped the same way.
 
-**What changed next:** the scope again, and the next architecture was Kubernetes.
+**What changed next:** the scope again, and Kubernetes was next.
 
 ## 4. Ripping it all down and learning Kubernetes
 
 So I tore it all down: every ECS service and every pipeline that fed it. Then I learned
-Kubernetes properly. I worked through **Kubernetes the Hard Way** to understand what a cluster
-is made of, then **self-hosted a Kubernetes machine** of my own. Along the way I learned the
-parts a managed cloud hides from you:
+Kubernetes properly. I worked through **Kubernetes the Hard Way** to see what a cluster
+is made of, then **self-hosted a Kubernetes machine** of my own. That taught me the
+parts a managed cloud hides:
 
 - **Certificates and TLS**, issued and renewed automatically.
 - **Proxmox** virtualization, to run and rebuild nodes freely.
@@ -56,8 +56,8 @@ That personal cluster became the blueprint for my studio's infrastructure, the
 
 ## 5. Seneca Foundation's official cluster (Sep 2025 to 2026)
 
-Then I applied all of it to **Seneca Foundation's official Kubernetes cluster**, under the
-supervision of **Harrison**, my boss and training mentor during my apprenticeship. The git
+Then I applied all of it to **Seneca Foundation's official Kubernetes cluster**, supervised by
+**Harrison**, my boss and training mentor during my apprenticeship. The git
 history shows the build-out:
 
 | When | What landed |
@@ -70,16 +70,16 @@ history shows the build-out:
 | Mar 2026 | PostgreSQL as a chart, with a network policy and a disruption budget |
 | Aug 2026 | Terraform + Ansible provisioning, and a [cost analysis of where to host it](/writing/aws-vs-ovh-k3s-cost-analysis) |
 
-The ingress rows tell the most honest story: I changed controllers, tried TLS passthrough,
-and moved certificate handling twice before settling on a design. That's what learning in
-production looks like when every step is in git and can be reviewed.
+The ingress rows are the messy part: I changed controllers, tried TLS passthrough,
+and moved certificate handling twice before settling on a design. Every step is in git and
+can be reviewed.
 
-Alongside all of this, I've been studying for the **Certified Kubernetes Administrator
+I've also been studying for the **Certified Kubernetes Administrator
 (CKA)** exam.
 
 ## 6. Where it is now
 
-Today I run two well-defined clusters, both managed entirely with GitOps:
+Today I run two clusters, both managed with GitOps:
 
 - **Seneca Foundation's cluster**, hosting all of its deployed projects.
 - **The Tidan Games cluster**, for my studio: Helm charts deployed by **Argo CD**; metrics and
@@ -89,11 +89,11 @@ Today I run two well-defined clusters, both managed entirely with GitOps:
 ## What tearing it down taught me
 
 - **Rebuild when the scope changes, not when it breaks.** Each stage was right for its moment.
-  Keeping an architecture past its moment is how you end up with the fragile parts.
+  Keeping one past that is how you end up with fragile parts.
 - **Version control is the real platform.** The jump that mattered most wasn't ECS or
   Kubernetes. It was the configuration moving into git, so every change is reviewable and
   repeatable.
 - **Managed services hide the fundamentals.** Self-hosting forced me to understand
-  certificates, DNS, routing and storage. That's exactly what I need when something breaks at 2 a.m.
-- **Have a mentor review your work.** Building Seneca's cluster under Harrison's supervision
-  meant every decision got questioned, and the design is better for it.
+  certificates, DNS, routing and storage. That's what I need when something breaks at 2 a.m.
+- **Have a mentor review your work.** Harrison questioned every decision on Seneca's cluster,
+  and the design is better for it.

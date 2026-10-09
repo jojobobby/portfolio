@@ -10,15 +10,15 @@ project: cosmic-realm
 Cosmic Realm's server splits every map into chunks of 16 by 16 tiles. Enemies only run when a
 player is within 3 chunks of them. Everything else sleeps, which is how a big realm stays cheap.
 
-The slow part was finding where the players were. Every tick, in every world, the server went
-through every chunk of the map and asked "is a player here?" A 2048 by 2048 realm has 16,384
-chunks. With ten players online, almost all of those checks found nothing. It also built a
-brand new set for the answer each time, which is more garbage for .NET to clean up.
+The slow part was finding where the players were. Every tick, in every world, the server checked
+every chunk of the map for a player. A 2048 by 2048 realm has 16,384 chunks. With ten players
+online, almost all of those checks found nothing. It also built a new set for the answer each
+time, which is more garbage for .NET to clean up.
 
 ## The fix
 
-Stop searching, and keep count instead. Every chunk has a counter of how many things are in it,
-and the map keeps a set of the chunks that aren't empty:
+Stop searching and keep count. Every chunk has a counter of how many things are in it, and the
+map keeps a set of the chunks that aren't empty:
 
 ```csharp
 void Occupy(int x, int y) { var i = ChunkIndex(x, y); if (_chunkCounts[i]++ == 0) _occupied.Add(i); }
@@ -35,7 +35,7 @@ after hundreds of random moves.
 
 ## Same idea, other places
 
-The same pass through the server found this pattern twice more:
+The same pass found two more cases:
 
 - **Projectiles** were looked up by a `Tuple` key, which allocates on every add, remove and
   lookup. Now the key is one `long`, with the owner's id and the bullet's id packed together.
@@ -44,6 +44,6 @@ The same pass through the server found this pattern twice more:
 
 ## What I adopted
 
-If the server asks the same question every tick, keep the answer up to date as things change,
-instead of searching for it again. It costs a counter update on each move, and saves a full
-search on every tick.
+If the server asks the same question every tick, keep the answer up to date as things change
+instead of searching again. It costs a counter update on each move and saves a full search on
+every tick.

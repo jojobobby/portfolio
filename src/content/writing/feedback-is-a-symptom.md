@@ -3,12 +3,12 @@ title: 'User feedback expresses symptoms, never the problem or the solution'
 date: 2026-10-09
 kind: design
 tag: takeaway
-summary: Players tell you where it hurts, not what to fix. And why the grind should be fun.
+summary: Players tell you where it hurts, not what to fix. The grind should still be fun.
 project: arcana
 ---
 
 When players complain, they're almost always right that something is wrong. They're often
-wrong about the fix. A complaint is a symptom. Your job is to find the cause.
+wrong about the fix. A complaint is a symptom, and your job is to find the cause.
 
 ## "Drop rates are too low"
 
@@ -49,13 +49,13 @@ rooms within a minute and the master wakes in hard mode.
 Games are about excitement. Grinding for gear, hitting problems and finding things that are
 broken can all be part of that, if you design them in.
 
-**Make finding bugs part of the game.** One thing I want to build: an NPC you report bugs to,
-in game. We admins see every report in game too, and players who find real issues get paid
-out in rewards. Bug hunting becomes something players chase, and we get better reports.
+**Make finding bugs part of the game.** One thing I want to build: an NPC you report bugs to
+in game. Admins see every report, and players who find real issues get paid out in rewards.
+Bug hunting becomes something players chase, and we get better reports.
 
-**Give the grind real highs.** A long grind works when it has moments. Occasional rare
-drops that aren't exactly what you came for, but still make you stop and look, keep people
-going while they chase the thing they actually want.
+**Give the grind real highs.** A long grind works when it has moments. Rare drops that
+aren't what you came for, but still make you stop and look, keep people going while they
+chase the thing they want.
 
 **Let players choose harder for better.** Higher difficulty should pay more. You clear fewer
 dungeons, but each one moves you further. That rewards people who min/max their builds and

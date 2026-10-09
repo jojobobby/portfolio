@@ -12,8 +12,8 @@ telling you what's wrong.
 
 For Arcana we run playtest groups of 50+ players. Every update goes to them first. They play
 it, break it and tell us what felt bad. We fix it, and the next update goes back to the same
-group. That loop doesn't stop. I call it CI-UT: continuous integration user testing. Every
-build goes to real users, the same way every commit goes through CI.
+group. I call it CI-UT: continuous integration user testing. Every build goes to real users,
+the same way every commit goes through CI.
 
 ## Why 50+
 
@@ -40,5 +40,5 @@ week. New testers can't.
 ## The point
 
 We're not testing to prove we were right. We're testing to find out where we were wrong,
-while it's still cheap to fix. Players can tell when a game was built with them in mind, and
-the only way I know to do that is to keep asking them.
+while it's still cheap to fix. Players can tell when a game was built with them in mind. The
+only way I know to do that is to keep asking them.

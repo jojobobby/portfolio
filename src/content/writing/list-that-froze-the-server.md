@@ -3,7 +3,7 @@ title: 'A list of 52,000 enemies froze the server'
 date: 2026-10-09
 kind: engineering
 tag: learning
-summary: My biggest speedup on a single call. Swapping a List for a HashSet took /killall from 26 seconds of frozen server to about 1.
+summary: My biggest single-call speedup. A List to a HashSet took /killall from 26 seconds frozen to about 1.
 project: arcana
 ---
 
@@ -23,7 +23,7 @@ already gone, so that walk went all the way to the end and found nothing. Every 
 two walks over up to 52,000 entries, and `/killall` did that 52,000 times on the main thread.
 
 It wasn't only `/killall`. Every normal kill in the Overworld paid the same cost, just spread
-out where nobody noticed it.
+out where nobody noticed.
 
 ## The fix
 
@@ -35,8 +35,8 @@ public List<DungeonEnemy> dungeonEnemies;
 public HashSet<DungeonEnemy> dungeonEnemies;
 ```
 
-A `HashSet` finds an item by its hash instead of walking, so removing one doesn't depend on how
-many there are. The open world's enemy lists per terrain got the same change.
+A `HashSet` finds an item by its hash instead of walking. The open world's enemy lists per
+terrain got the same change.
 
 Two more changes, so one huge command can't stall the game:
 

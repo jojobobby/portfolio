@@ -14,7 +14,7 @@ PvP is different. Your target is a person who is also dodging, and at 10 TPS a s
 player can move almost a whole tile between updates. Shots that clearly hit on your screen
 missed on the server. Players teleported around. It was hell.
 
-So we're doing a full PvP rewrite. This is where it stands.
+So we're doing a full PvP rewrite. Here's where it stands.
 
 ## Who decides a hit
 
@@ -33,14 +33,13 @@ use it to learn the limits.
 
 ## Faster movement, only where it matters
 
-The game itself stays at 10 TPS. That keeps everything else cheap. But on the PvP island,
-movement runs faster: players send their position about 30 times a second instead of 10, and
-the server passes hostile players' positions to each other between ticks, up to every 30 ms,
-for the 32 nearest players. Everywhere else nothing changes.
+The game stays at 10 TPS, which keeps everything else cheap. On the PvP island, movement runs
+faster: players send their position about 30 times a second instead of 10, and the server
+passes hostile players' positions to each other between ticks, up to every 30 ms, for the 32
+nearest players. Everywhere else nothing changes.
 
-On screen, other players glide smoothly between updates, and how long that glide takes adapts
-to how steady the updates are arriving. Smooth movement is always on now; it used to be an
-option.
+Other players glide smoothly between updates, and the glide adapts to how steadily updates
+arrive. Smooth movement is always on now; it used to be an option.
 
 ## High ping vs low ping
 
@@ -67,8 +66,8 @@ them. So the server rewinds the target by your ping plus that display delay.
 
 You get 15 seconds of protection when you arrive, and you can't attack during it either.
 Attacking tags both players for 15 seconds, so nobody can teleport out of a fight. Hits on
-players do a fraction of their normal damage, so a fight takes more than a couple of shots. And if you die, you drop everything,
-which is why the island's loot is boosted.
+players do a fraction of their normal damage, so a fight takes more than a couple of shots.
+And if you die, you drop everything, which is why the island's loot is boosted.
 
 ## What's next
 

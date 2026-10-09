@@ -26,7 +26,7 @@ const initial = [...videos].reverse();
 
   <div id="vgrid" class="vids">
     {initial.map((v) => (
-      <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
+      <a class="vid" data-date={v.date} href={`https://www.youtube.com/watch?v=${v.id}`}>
         <span class="vid__thumb"><img src={`/media/yt/${v.id}.jpg`} alt="" loading="lazy" decoding="async" /><span class="play" aria-hidden="true">▶</span></span>
         <span class="vid__title">{v.title}</span>
         <span class="vid__date">{stamp(v.date)}</span>
@@ -57,7 +57,7 @@ const initial = [...videos].reverse();
         const thumb = document.createElement('span');
         thumb.className = 'vid__thumb';
         const img = document.createElement('img');
-        img.src = `/api/videos/${v.id}/thumb`;
+        img.src = v.local ? `/media/yt/${v.id}.jpg` : `/api/videos/${v.id}/thumb`;
         img.alt = '';
         img.loading = 'lazy';
         const play = document.createElement('span');
@@ -103,7 +103,8 @@ const initial = [...videos].reverse();
           all = [...grid.querySelectorAll('.vid')].map((a) => ({
             id: new URL(a.href).searchParams.get('v'),
             title: a.querySelector('.vid__title').textContent,
-            date: null,
+            date: a.dataset.date || null,
+            local: true,
           }));
           render();
         });

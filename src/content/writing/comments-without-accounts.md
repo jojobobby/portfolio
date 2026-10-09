@@ -3,7 +3,7 @@ title: 'Comments without accounts'
 date: 2026-10-09
 kind: engineering
 tag: learning
-summary: How you can comment here with just a name, and why your email stays private.
+summary: Comment here with just a name, and your email stays private.
 project: tidan-platform
 ---
 
@@ -19,15 +19,15 @@ your comment, done. Adding an email is optional.
   either.
 
 I first wanted to recognise people by a hardware ID, but websites can't read those, on
-purpose. A random ID saved in your browser plus your IP does the same job: it can tell when
-the same person comments again, without needing a login.
+purpose. A random ID saved in your browser plus your IP does the job: it can tell when
+the same person comments again, without a login.
 
 ## Reply emails, done safely
 
-If anyone could type any email and get it spammed with reply notifications, that would be a
-problem. So the first time you use an email, you get one message with a confirm link. Nothing
-else is sent until you click it. After that, you get an email when someone replies to you,
-and every one of those emails has a link to stop them.
+Without a check, anyone could type your email and spam you with reply notifications. So the
+first time you use an email, you get one message with a confirm link. Nothing else is sent
+until you click it. After that, you get an email when someone replies to you, and each one
+has a link to stop them.
 
 ## Keeping spam out
 
