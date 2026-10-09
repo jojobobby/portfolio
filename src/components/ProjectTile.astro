@@ -12,7 +12,7 @@ const isSprite = d.cover?.endsWith('.gif');
   <div class="tile__media">
     {d.video ? (
       <>
-        <img src={`https://i.ytimg.com/vi/${d.video}/hqdefault.jpg`} alt={`${d.title} video`} loading="lazy" decoding="async" />
+        <img src={`https://i.ytimg.com/vi/${d.video}/maxresdefault.jpg`} onerror="this.onerror=null;this.src=this.src.replace('maxresdefault','hqdefault')" alt={`${d.title} video`} loading="lazy" decoding="async" />
         <span class="play" aria-hidden="true">▶</span>
       </>
     ) : d.cover ? (

@@ -60,7 +60,7 @@ const videos = [
     {videos.map((v) => (
       <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
         <span class="vid__thumb">
-          <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" />
+          <img src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`} onerror="this.onerror=null;this.src=this.src.replace('maxresdefault','hqdefault')" alt="" loading="lazy" decoding="async" />
           <span class="play" aria-hidden="true">▶</span>
         </span>
         <span class="vid__title">{v.title}</span>

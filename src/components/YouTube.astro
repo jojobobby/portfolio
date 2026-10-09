@@ -1,11 +1,12 @@
 ---
 // Privacy-friendly YouTube embed: no cookies until the visitor presses play.
+// YouTube picks quality mostly from the player's size, so give it room; vq is only a hint.
 interface Props { id: string; title: string }
 const { id, title } = Astro.props;
 ---
 <div class="video">
   <iframe
-    src={`https://www.youtube-nocookie.com/embed/${id}?rel=0`}
+    src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&vq=hd1080`}
     title={title}
     loading="lazy"
     allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"

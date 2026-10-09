@@ -280,6 +280,8 @@ p, li { color: var(--text); }
   color: #fff; display: grid; place-items: center; font-size: 1.1rem; pointer-events: none; }
 
 /* ===== Home: hero video + videos grid + contact ===== */
+.hero:has(.hero__video) { grid-template-columns: 1fr; gap: 24px; }
+.hero:has(.hero__video) .hero__text { max-width: 760px; }
 .hero__video .video { margin: 0; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6); }
 .vids { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
 .vid { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--text); }
