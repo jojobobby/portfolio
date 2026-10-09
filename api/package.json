@@ -1,0 +1,11 @@
+{
+  "name": "rrobinson-comments-api",
+  "private": true,
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": { "start": "node server.mjs", "test": "node --test" },
+  "dependencies": {
+    "nodemailer": "^10.0.16",
+    "pg": "^8.23.1"
+  }
+}

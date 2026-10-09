@@ -47,7 +47,10 @@ const numbers = [
   <hr class="section-rule" />
   <div class="tiles">{studio.map((p) => <ProjectTile project={p} />)}</div>
 
-  <h2 class="section-title" id="videos">Videos</h2>
+  <div class="section-head">
+    <h2 class="section-title" id="videos">Videos</h2>
+    <a class="section-more" href="/videos">Show more</a>
+  </div>
   <hr class="section-rule" />
   <div class="vids">
     {videos.map((v) => (
@@ -61,7 +64,6 @@ const numbers = [
       </a>
     ))}
   </div>
-  <p class="section-note"><a href={SITE.youtube}>More on my YouTube</a></p>
 
   <h2 class="section-title" id="professional">Professional</h2>
   <hr class="section-rule" />
@@ -75,7 +77,10 @@ const numbers = [
     ))}
   </div>
 
-  <h2 class="section-title">Writing</h2>
+  <div class="section-head">
+    <h2 class="section-title">Blog &amp; Chat</h2>
+    <a class="section-more" href="/writing">Show more</a>
+  </div>
   <hr class="section-rule" />
   <ul class="posts">
     {posts.map((post) => (

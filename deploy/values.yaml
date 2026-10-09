@@ -19,3 +19,18 @@ resources:
     memory: 32Mi
   limits:
     memory: 128Mi
+
+# Comments + video sync API (api/ in this repo), served at <host>/api.
+apiImage:
+  repository: ghcr.io/jojobobby/portfolio-api
+# Set by CI on every push to main. Do not edit by hand.
+apiTag: "bootstrap"
+api:
+  # Out-of-band Secret: DATABASE_URL, ADMIN_TOKEN (secret.example.yaml)
+  existingSecret: portfolio-api
+  youtubeHandle: "@RalphOfc"
+  smtpHost: mail.mail.svc
+  mailFrom: "Rapheal Robinson <noreply@tidangames.com>"
+  resources:
+    requests: { cpu: 10m, memory: 64Mi }
+    limits: { memory: 256Mi }

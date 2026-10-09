@@ -37,6 +37,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: API tests
+        run: cd api && npm ci --no-audit --no-fund && npm test
+
       - name: Build & push
         uses: docker/build-push-action@v6
         with:
@@ -50,9 +53,23 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Point the chart at the new image
+      - name: Build & push the API
+        uses: docker/build-push-action@v6
+        with:
+          context: ./api
+          push: true
+          tags: |
+            ghcr.io/jojobobby/portfolio-api:${{ steps.tag.outputs.short }}
+            ghcr.io/jojobobby/portfolio-api:latest
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha,scope=api
+          cache-to: type=gha,scope=api,mode=max
+
+      - name: Point the chart at the new images
         run: |
           sed -i "s|^  tag: .*|  tag: \"${{ steps.tag.outputs.short }}\"|" deploy/values.yaml
+          sed -i "s|^apiTag: .*|apiTag: \"${{ steps.tag.outputs.short }}\"|" deploy/values.yaml
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add deploy/values.yaml

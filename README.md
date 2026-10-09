@@ -33,3 +33,17 @@ npm run build    # static site in dist/
 - `nginx.conf` + `security-headers.inc`: routing, caching, CSP and other headers.
 - `deploy/`: the Helm chart (2 replicas, zero-downtime rolling updates, ingress + Let's Encrypt
   certificate via cert-manager). `image.tag` is written by CI only.
+
+## Comments and videos API
+
+`api/` is a small Node service at `/api` (deployment `portfolio-api`):
+
+- **Comments:** name, optional email, comment. Stored in the shared Postgres (database
+  `portfolio`). Emails are never returned by the API; they are only used for reply
+  notifications after a one-time confirm link, and every reply email has an unsubscribe link.
+  The server also stores the visitor IP and a random browser ID for spam limits.
+- **Videos:** every 6 hours it reads the @RalphOfc channel and stores each video's id, title,
+  upload date and thumbnail (never the video). The Videos page reads `/api/videos`.
+- **Moderation:** `curl -X DELETE -H "Authorization: Bearer $ADMIN_TOKEN" https://rrobinson.me/api/comments/<id>`
+
+Secret `portfolio-api` (namespace `portfolio`, out of band): `DATABASE_URL`, `ADMIN_TOKEN`.

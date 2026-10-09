@@ -295,3 +295,38 @@ p, li { color: var(--text); }
 .hero__video .video__date { margin: 8px 0 0; }
 
 .post-date { color: var(--text-dim); margin-left: 10px; }
+
+/* Section title with a "Show more" link on the right */
+.section-head { position: relative; }
+.section-more { position: absolute; right: 0; bottom: 6px; font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+@media (max-width: 560px) { .section-more { position: static; display: block; text-align: right; margin-top: 4px; } }
+
+/* ===== Videos page ===== */
+.videos-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.videos-head h1 { margin: 0; }
+.vtools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 18px; }
+.vtools__search { flex: 1 1 260px; min-width: 0; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--bg-raised); color: var(--text); font: inherit; }
+.vtools__search:focus, .vtools__sort:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.vtools__sort { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-raised); color: var(--text); font: inherit; }
+.vtools__count { color: var(--text-dim); font-size: 0.9rem; margin-left: auto; }
+
+/* ===== Comments ===== */
+.comments { max-width: 74ch; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 8px; }
+.comments__list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 12px; }
+.comments__list--replies { margin: 10px 0 0 18px; padding-left: 12px; border-left: 2px solid var(--line); }
+.comment { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.comment__head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.comment__body { margin: 6px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comments__notice { background: var(--bg-raised); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 6px; }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; font-size: 0.88rem; cursor: pointer; }
+.cform { display: grid; gap: 12px; background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.cform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cform label { display: grid; gap: 6px; font-weight: 600; font-size: 0.92rem; }
+.cform input, .cform textarea { font: inherit; font-weight: 400; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; }
+.cform input:focus, .cform textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.cform__trap { position: absolute; left: -9999px; }
+.cform__privacy { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
+.cform__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cform__status { color: var(--text-dim); font-size: 0.9rem; }
+@media (max-width: 560px) { .cform__row { grid-template-columns: 1fr; } }

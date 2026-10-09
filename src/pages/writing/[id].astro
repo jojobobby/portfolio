@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Comments from '../../components/Comments.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing');
@@ -12,7 +13,7 @@ const { Content } = await render(post);
 const project = post.data.project ? await getEntry('projects', post.data.project) : undefined;
 ---
 <Base title={post.data.title} description={post.data.summary}>
-  <p><a href="/writing">← All writing</a></p>
+  <p><a href="/writing">← Blog &amp; Chat</a></p>
   <header class="project-head">
     <span class="tile__role">{post.data.kind}{post.data.tag ? ` ${post.data.tag}` : ''} <span class="post-date">{post.data.date.toISOString().slice(0, 10)}</span></span>
     <h1>{post.data.title}</h1>
@@ -22,4 +23,5 @@ const project = post.data.project ? await getEntry('projects', post.data.project
   <article class="prose">
     <Content />
   </article>
+  <Comments post={post.id} />
 </Base>

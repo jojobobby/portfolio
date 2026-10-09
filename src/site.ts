@@ -15,6 +15,7 @@ export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/#professional', label: 'Professional' },
   { href: '/#studio', label: 'Studio Projects' },
-  { href: '/writing', label: 'Writing' },
+  { href: '/videos', label: 'Videos' },
+  { href: '/writing', label: 'Blog & Chat' },
   { href: '/about', label: 'About & Résumé' },
 ];

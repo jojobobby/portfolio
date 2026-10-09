@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+import { videos, stamp } from '../data/videos';
+
+// Rendered at build time from the local list, then replaced in the browser by every video
+// the API has synced from the channel (titles, dates, thumbnails; refreshed every 6 hours).
+const initial = [...videos].reverse();
+---
+<Base title="Videos" description="Every video from Rapheal Robinson's YouTube channel.">
+  <div class="videos-head">
+    <h1>Videos</h1>
+    <a class="btn btn--ghost" href={SITE.youtube}>YouTube channel</a>
+  </div>
+
+  <div class="vtools" role="search">
+    <input id="vq" class="vtools__search" type="search" placeholder="Search videos" aria-label="Search videos" autocomplete="off" />
+    <select id="vsort" class="vtools__sort" aria-label="Sort videos">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="az">Title, A to Z</option>
+      <option value="za">Title, Z to A</option>
+    </select>
+    <span id="vcount" class="vtools__count">{initial.length} videos</span>
+  </div>
+
+  <div id="vgrid" class="vids">
+    {initial.map((v) => (
+      <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
+        <span class="vid__thumb"><img src={`/media/yt/${v.id}.jpg`} alt="" loading="lazy" decoding="async" /><span class="play" aria-hidden="true">▶</span></span>
+        <span class="vid__title">{v.title}</span>
+        <span class="vid__date">{stamp(v.date)}</span>
+      </a>
+    ))}
+  </div>
+  <p id="vempty" class="section-note" hidden>No videos match that search.</p>
+
+  <script is:inline>
+    (() => {
+      const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const stamp = (d) => (d ? `${MONTHS[Number(d.slice(5, 7)) - 1]} ${d.slice(0, 4)}` : '');
+      const grid = document.getElementById('vgrid');
+      const q = document.getElementById('vq');
+      const sort = document.getElementById('vsort');
+      const count = document.getElementById('vcount');
+      const empty = document.getElementById('vempty');
+      let all = null;
+
+      const params = new URLSearchParams(location.search);
+      if (params.get('q')) q.value = params.get('q');
+      if (params.get('sort')) sort.value = params.get('sort');
+
+      function card(v) {
+        const a = document.createElement('a');
+        a.className = 'vid';
+        a.href = `https://www.youtube.com/watch?v=${v.id}`;
+        const thumb = document.createElement('span');
+        thumb.className = 'vid__thumb';
+        const img = document.createElement('img');
+        img.src = `/api/videos/${v.id}/thumb`;
+        img.alt = '';
+        img.loading = 'lazy';
+        const play = document.createElement('span');
+        play.className = 'play';
+        play.textContent = '▶';
+        thumb.append(img, play);
+        const title = document.createElement('span');
+        title.className = 'vid__title';
+        title.textContent = v.title;
+        const date = document.createElement('span');
+        date.className = 'vid__date';
+        date.textContent = stamp(v.date);
+        a.append(thumb, title, date);
+        return a;
+      }
+
+      function render() {
+        if (!all) return;
+        const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+        let list = all.filter((v) => words.every((w) => v.title.toLowerCase().includes(w)));
+        const by = sort.value;
+        list.sort((a, b) =>
+          by === 'oldest' ? (a.date || '').localeCompare(b.date || '')
+          : by === 'az' ? a.title.localeCompare(b.title)
+          : by === 'za' ? b.title.localeCompare(a.title)
+          : (b.date || '').localeCompare(a.date || ''));
+        grid.replaceChildren(...list.map(card));
+        count.textContent = `${list.length} ${list.length === 1 ? 'video' : 'videos'}`;
+        empty.hidden = list.length > 0;
+        const p = new URLSearchParams();
+        if (q.value) p.set('q', q.value);
+        if (by !== 'newest') p.set('sort', by);
+        history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
+      }
+
+      q.addEventListener('input', render);
+      sort.addEventListener('change', render);
+      fetch('/api/videos')
+        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then((list) => { all = list; render(); })
+        .catch(() => {
+          // API unreachable: search and sort the built-in list instead.
+          all = [...grid.querySelectorAll('.vid')].map((a) => ({
+            id: new URL(a.href).searchParams.get('v'),
+            title: a.querySelector('.vid__title').textContent,
+            date: null,
+          }));
+          render();
+        });
+    })();
+  </script>
+</Base>

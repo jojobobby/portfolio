@@ -90,6 +90,13 @@ spec:
     - host: {{ .Values.host }}
       http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio-api
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:

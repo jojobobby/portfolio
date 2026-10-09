@@ -4,12 +4,8 @@ import Base from '../../layouts/Base.astro';
 
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<Base title="Writing" description="Postmortems, engineering notes and design write-ups by Rapheal Robinson.">
-  <h1>Writing</h1>
-  <p class="lede">
-    Postmortems, engineering notes and design write-ups from the systems I build and run. Incidents are
-    written blameless-style: what happened, why, what fixed it, and what keeps it from happening again.
-  </p>
+<Base title="Blog & Chat" description="Blog posts by Rapheal Robinson. Comment on any post, no account needed.">
+  <h1>Blog &amp; Chat</h1>
   <ul class="posts">
     {posts.map((post) => (
       <li>

@@ -1,0 +1,144 @@
+---
+// Comments under a post. No account: a name, an optional email, and the comment.
+// Talks to /api/comments (api/server.mjs). All text is shown with textContent, never as HTML.
+interface Props { post: string }
+const { post } = Astro.props;
+---
+<section id="comments" class="comments" data-post={post}>
+  <h2>Comments</h2>
+  <p class="comments__notice" hidden></p>
+  <ol class="comments__list"></ol>
+  <p class="comments__empty dim" hidden>No comments yet. Be the first.</p>
+
+  <form class="cform" novalidate>
+    <p class="cform__replying" hidden>Replying to <strong></strong> <button type="button" class="linkish">Cancel</button></p>
+    <div class="cform__row">
+      <label>Name <input name="name" maxlength="40" required autocomplete="nickname" /></label>
+      <label>Email <span class="dim">(optional)</span> <input name="email" type="email" maxlength="254" autocomplete="email" /></label>
+    </div>
+    <label>Comment <textarea name="body" rows="4" maxlength="2000" required></textarea></label>
+    <!-- Hidden from people; bots fill it in. -->
+    <label class="cform__trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+    <p class="cform__privacy">
+      Your email is never shown or shared. It's only used to email you when someone replies, after
+      you confirm it, and every email has a link to stop them. To prevent spam, the server keeps
+      your IP address and a random ID saved in this browser.
+    </p>
+    <div class="cform__actions">
+      <button class="btn" type="submit">Post comment</button>
+      <span class="cform__status" role="status"></span>
+    </div>
+  </form>
+</section>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById('comments');
+    const post = root.dataset.post;
+    const list = root.querySelector('.comments__list');
+    const empty = root.querySelector('.comments__empty');
+    const notice = root.querySelector('.comments__notice');
+    const form = root.querySelector('.cform');
+    const status = root.querySelector('.cform__status');
+    const replying = root.querySelector('.cform__replying');
+    let parentId = null;
+
+    let deviceId = null;
+    try { deviceId = localStorage.getItem('rr-device'); } catch {}
+    if (!deviceId) {
+      deviceId = (crypto.randomUUID && crypto.randomUUID()) || `d-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+      try { localStorage.setItem('rr-device', deviceId); } catch {}
+    }
+    try { const saved = JSON.parse(localStorage.getItem('rr-commenter') || '{}'); form.name.value = saved.name || ''; form.email.value = saved.email || ''; } catch {}
+
+    const params = new URLSearchParams(location.search);
+    if (params.get('confirmed')) { notice.textContent = 'Email confirmed. You will get an email when someone replies to you.'; notice.hidden = false; }
+    if (params.get('unsubscribed')) { notice.textContent = 'Done. You will not get any more reply emails.'; notice.hidden = false; }
+
+    const when = (iso) => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+
+    function item(c, children) {
+      const li = document.createElement('li');
+      li.className = 'comment';
+      li.id = `c${c.id}`;
+      const head = document.createElement('div');
+      head.className = 'comment__head';
+      const name = document.createElement('strong');
+      name.textContent = c.name;
+      const date = document.createElement('span');
+      date.className = 'dim';
+      date.textContent = when(c.createdAt);
+      head.append(name, date);
+      const body = document.createElement('p');
+      body.className = 'comment__body';
+      body.textContent = c.body;
+      const reply = document.createElement('button');
+      reply.type = 'button';
+      reply.className = 'linkish';
+      reply.textContent = 'Reply';
+      reply.addEventListener('click', () => {
+        parentId = c.id;
+        replying.querySelector('strong').textContent = c.name;
+        replying.hidden = false;
+        form.body.focus();
+      });
+      li.append(head, body, reply);
+      const kids = children.get(c.id) || [];
+      if (kids.length) {
+        const ol = document.createElement('ol');
+        ol.className = 'comments__list comments__list--replies';
+        kids.forEach((k) => ol.append(item(k, children)));
+        li.append(ol);
+      }
+      return li;
+    }
+
+    async function load() {
+      try {
+        const res = await fetch(`/api/comments?post=${encodeURIComponent(post)}`);
+        if (!res.ok) throw new Error();
+        const rows = await res.json();
+        const ids = new Set(rows.map((r) => r.id));
+        const children = new Map();
+        const top = [];
+        for (const r of rows) {
+          if (r.parentId && ids.has(r.parentId)) {
+            if (!children.has(r.parentId)) children.set(r.parentId, []);
+            children.get(r.parentId).push(r);
+          } else top.push(r);
+        }
+        list.replaceChildren(...top.map((r) => item(r, children)));
+        empty.hidden = rows.length > 0;
+      } catch {
+        empty.textContent = 'Comments are unavailable right now.';
+        empty.hidden = false;
+      }
+    }
+
+    replying.querySelector('button').addEventListener('click', () => { parentId = null; replying.hidden = true; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Posting...';
+      const payload = {
+        post, parentId, deviceId,
+        name: form.name.value, email: form.email.value, body: form.body.value, website: form.website.value,
+      };
+      try {
+        const res = await fetch('/api/comments', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { status.textContent = data.error || 'Could not post. Try again.'; return; }
+        try { localStorage.setItem('rr-commenter', JSON.stringify({ name: form.name.value, email: form.email.value })); } catch {}
+        form.body.value = '';
+        parentId = null;
+        replying.hidden = true;
+        status.textContent = data.needsConfirm ? 'Posted. Check your email to turn on reply emails.' : 'Posted.';
+        await load();
+      } catch {
+        status.textContent = 'Could not post. Check your connection and try again.';
+      }
+    });
+
+    load();
+  })();
+</script>
