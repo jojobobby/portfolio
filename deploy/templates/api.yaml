@@ -36,6 +36,7 @@ spec:
             - { name: SITE_URL, value: "https://{{ .Values.host }}" }
             - { name: YOUTUBE_HANDLE, value: {{ .Values.api.youtubeHandle | quote }} }
             - { name: SMTP_HOST, value: {{ .Values.api.smtpHost | quote }} }
+            - { name: SMTP_TLS_NAME, value: {{ .Values.api.smtpTlsName | quote }} }
             - { name: MAIL_FROM, value: {{ .Values.api.mailFrom | quote }} }
           envFrom:
             - secretRef:

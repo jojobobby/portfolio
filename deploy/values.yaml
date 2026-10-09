@@ -31,7 +31,16 @@ api:
   youtubeHandle: "@RalphOfc"
   # Submission to the inbox server as noreply@ (SMTP_USER/SMTP_PASS in the Secret).
   smtpHost: inbox.inbox.svc
+  # The inbox presents its public certificate; verify it under this name.
+  smtpTlsName: mail.tidangames.com
   mailFrom: "Rapheal Robinson <noreply@tidangames.com>"
   resources:
     requests: { cpu: 10m, memory: 64Mi }
     limits: { memory: 256Mi }
+
+# Only the ingress controller (and the node, for kubelet health checks) can reach the pods.
+# Without this, any pod in the cluster could call the API directly and fake its client IP.
+networkPolicy:
+  enabled: true
+  ingressNamespace: haproxy-ingress
+  nodeCidr: 147.135.8.100/32

@@ -1,0 +1,45 @@
+{{- if .Values.networkPolicy.enabled }}
+# The site: reachable from the ingress, the node (health checks), and the API (it checks a post
+# exists before taking comments on it).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: portfolio
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: portfolio
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Values.networkPolicy.ingressNamespace }}
+        - ipBlock:
+            cidr: {{ .Values.networkPolicy.nodeCidr }}
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: portfolio-api
+      ports:
+        - { port: 8080, protocol: TCP }
+---
+# The API: reachable only from the ingress, which sets the real client IP, and the node.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: portfolio-api
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: portfolio-api
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Values.networkPolicy.ingressNamespace }}
+        - ipBlock:
+            cidr: {{ .Values.networkPolicy.nodeCidr }}
+      ports:
+        - { port: 3000, protocol: TCP }
+{{- end }}

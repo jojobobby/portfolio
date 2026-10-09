@@ -39,5 +39,6 @@ client, design the content, and run it in production.
 
 ## History
 
-Forked from Cosmic v2 (09DZL's game), developed as Tidan's Realm VI, renamed Arcana when I
+Started as Cosmic v2, a game I designed with 09 and Delik. I was doing most of the work, so I
+split off with my own fork, Tidan's Realm. That became Tidan's Realm VI, renamed Arcana when I
 founded Tidan Games in 2026.

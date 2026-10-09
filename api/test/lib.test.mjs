@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateComment, clientIp, LIMITS } from '../lib.mjs';
+import { validateComment, clientIp, isAdmin, LIMITS } from '../lib.mjs';
 import { parseDateText, collect } from '../youtube.mjs';
 
 const ok = { post: 'pvp-at-10-tps', name: ' Ralph ', body: 'Nice post', deviceId: 'abcdef12-3456', email: '' };
@@ -45,4 +45,18 @@ test('collect finds videos and the next-page token anywhere in the page data', (
   const out = collect(page);
   assert.deepEqual(out.items, [{ id: 'abcdefghijk', title: 'Hi' }]);
   assert.equal(out.next, 'T');
+});
+test('strips control and invisible characters but keeps newlines', () => {
+  const flip = String.fromCharCode(0x202e);
+  const zw = String.fromCharCode(0x200b);
+  const r = validateComment({ ...ok, name: `Ra${flip}lph${zw}`, body: `one\r\n\n\n\ntwo\u0007` });
+  assert.equal(r.value.name, 'Ralph');
+  assert.equal(r.value.body, 'one\n\ntwo');
+  assert.equal(validateComment({ ...ok, name: flip + zw }).ok, false);
+});
+test('admin check needs the exact bearer token', () => {
+  assert.equal(isAdmin('Bearer s3cret', 's3cret'), true);
+  assert.equal(isAdmin('Bearer s3cre', 's3cret'), false);
+  assert.equal(isAdmin(undefined, 's3cret'), false);
+  assert.equal(isAdmin('Bearer ', ''), false);
 });

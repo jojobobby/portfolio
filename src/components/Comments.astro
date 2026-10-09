@@ -52,7 +52,28 @@ const { post } = Astro.props;
     try { const saved = JSON.parse(localStorage.getItem('rr-commenter') || '{}'); form.name.value = saved.name || ''; form.email.value = saved.email || ''; } catch {}
 
     const params = new URLSearchParams(location.search);
-    if (params.get('confirmed')) { notice.textContent = 'Email confirmed. You will get an email when someone replies to you.'; notice.hidden = false; }
+    const confirmToken = params.get('confirm');
+    if (confirmToken) {
+      // Arrived from the confirm email. Confirming takes a click, so mail scanners that open
+      // links can't turn reply emails on for someone.
+      history.replaceState(null, '', location.pathname + location.hash);
+      notice.textContent = 'Want an email when someone replies to you? ';
+      const yes = document.createElement('button');
+      yes.type = 'button';
+      yes.className = 'btn';
+      yes.textContent = 'Turn on reply emails';
+      yes.addEventListener('click', async () => {
+        yes.disabled = true;
+        try {
+          const res = await fetch('/api/confirm', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: confirmToken }) });
+          notice.textContent = res.ok ? 'Email confirmed. You will get an email when someone replies to you.' : 'That link has expired.';
+        } catch {
+          notice.textContent = 'Could not confirm. Check your connection and open the link again.';
+        }
+      });
+      notice.append(yes);
+      notice.hidden = false;
+    }
     if (params.get('unsubscribed')) { notice.textContent = 'Done. You will not get any more reply emails.'; notice.hidden = false; }
 
     const when = (iso) => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
