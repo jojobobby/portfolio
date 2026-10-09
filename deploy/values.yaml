@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/jojobobby/portfolio
   # Set by CI on every push to main (the short commit SHA). Do not edit by hand.
-  tag: "dede249"
+  tag: "eb8e39d"
   pullPolicy: IfNotPresent
 
 # Two replicas so a rollout or a pod restart never takes the site down.
@@ -24,7 +24,7 @@ resources:
 apiImage:
   repository: ghcr.io/jojobobby/portfolio-api
 # Set by CI on every push to main. Do not edit by hand.
-apiTag: "bootstrap"
+apiTag: "eb8e39d"
 api:
   # Out-of-band Secret: DATABASE_URL, ADMIN_TOKEN (secret.example.yaml)
   existingSecret: portfolio-api
