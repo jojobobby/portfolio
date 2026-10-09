@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/jojobobby/portfolio
   # Set by CI on every push to main (the short commit SHA). Do not edit by hand.
-  tag: "cfdc3ba"
+  tag: "fb8044c"
   pullPolicy: IfNotPresent
 
 # Two replicas so a rollout or a pod restart never takes the site down.
