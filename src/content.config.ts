@@ -16,6 +16,8 @@ const projects = defineCollection({
     summary: z.string(),
     tech: z.array(z.string()).default([]),
     cover: z.string().optional(),
+    // YouTube video id (the part after watch?v=). Shown instead of the cover when set.
+    video: z.string().optional(),
     coverAlt: z.string().optional(),
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
   }),

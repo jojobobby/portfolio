@@ -7,6 +7,7 @@ export const SITE = {
   email: 'raphealsmall@gmail.com',
   github: 'https://github.com/jojobobby',
   linkedin: 'https://www.linkedin.com/in/rapheal-robinson-598743167',
+  youtube: 'https://www.youtube.com/@RalphOfc',
   location: 'Chicago area · open to relocation',
 };
 

@@ -1,93 +1,43 @@
 ---
 title: Arcana
 org: Tidan Games LLC
-role: Founder · Lead Engineer & Game Designer
+role: Founder · Lead Engineer & Designer
 dates: 2023 – Present
 section: studio
 order: 1
-summary: A pixel-art MMORPG with a .NET game server and a native Haxe client. I design its systems and dungeons, write the server and client, and run its production.
-tech: [C# / .NET 9, Haxe / OpenFL, hxcpp, PostgreSQL, Redis, ASP.NET Core, Kubernetes, Argo CD, GitHub Actions]
+summary: A pixel-art MMORPG. I design it, build it and run it.
+tech: [C# / .NET 9, Haxe / OpenFL, PostgreSQL, Redis, Kubernetes, Argo CD]
 cover: /media/arcana/main-menu.jpg
-coverAlt: Arcana's Windows client at its main menu, a pixel-art forest behind the title and menu buttons
+coverAlt: Arcana's main menu
+video: hUZl8HxzW1o
 stats:
-  - { value: '818', label: 'player accounts in production (Oct 2026)' }
-  - { value: '2,000+', label: 'of my commits in its history' }
-  - { value: '~2,470', label: 'automated test cases' }
-  - { value: '200–500', label: 'unique playtesters over the project' }
-  - { value: '1 commit', label: 'builds client, server and website together' }
+  - { value: '818', label: 'player accounts' }
+  - { value: '2,000+', label: 'of my commits' }
+  - { value: '~2,470', label: 'automated tests' }
+  - { value: '200–500', label: 'playtesters' }
 ---
 
-Arcana is a real-time multiplayer action RPG: dungeons, a shared overworld, guilds, trading,
-crafting and PvP. I lead it end to end. I design the systems and content, write the game server
-and the client, and operate the infrastructure it runs on.
+Dungeons, an open overworld, guilds, trading, crafting and PvP. I write the server and the
+client, design the content, and run it in production.
 
-**Where it came from.** Arcana started as a fork of *Cosmic v2*, a game by another developer
-(09DZL), worked on with xDelik. A different game from my own [Cosmic Realm](/projects/cosmic-realm).
-I forked it as **Tidan's Realm**, developed it into **Tidan's Realm VI** (the name still on its
-client, above), and renamed it **Arcana** when I founded Tidan Games LLC in September 2026.
+## Design
 
-## The game
+- **Deserted Tomb:** light eight trial rooms to wake the boss. Light them all within a minute
+  and it wakes in hard mode.
+- **PvP island:** you can attack anyone outside your guild. New arrivals get 15 seconds of
+  protection, and a fight tag stops you escaping mid-fight.
+- **Allies:** summons, turrets and pets share one system, and you choose whose you see.
+- **Enemy levels:** each enemy gets a level and a rank, and one formula sets its stats.
 
-<div class="gallery">
-  <img src="/media/arcana/mysterious-merchant-greet.gif" alt="Mysterious Merchant NPC greeting animation" loading="lazy" />
-  <img src="/media/arcana/expedition-herald-greet.gif" alt="Expedition Herald NPC greeting animation" loading="lazy" />
-  <img src="/media/arcana/sandsurge-behemoth-rise.gif" alt="Sandsurge Behemoth rising out of the sand" loading="lazy" />
-  <img src="/media/arcana/reef-lantern-angler-surface.gif" alt="Reef Lantern Angler surfacing" loading="lazy" />
-  <img src="/media/arcana/radiant-reef-portal.gif" alt="Animated Radiant Reef dungeon portal" loading="lazy" />
-  <img src="/media/arcana/wandering-igloo-open.gif" alt="Wandering Igloo opening" loading="lazy" />
-  <img src="/media/arcana/dungeon-dweller.gif" alt="Dungeon Dweller NPC animation" loading="lazy" />
-  <img src="/media/arcana/auctioneer-idle.gif" alt="Auctioneer NPC idle animation" loading="lazy" />
-</div>
+## More videos
 
-### Design features I own
+- [Quest Showcase](https://www.youtube.com/watch?v=cRzuc4sMsc4)
+- [Summoner Showcase](https://www.youtube.com/watch?v=FiEjzFGnL5Y)
+- [Item Leveling Showcase](https://www.youtube.com/watch?v=o_K_tfyDBZI)
+- [Crafting Station Showcase](https://www.youtube.com/watch?v=MMVDr1D3cBE)
+- [Item Enchants](https://www.youtube.com/watch?v=l-ouEhlwqAs)
 
-**Deserted Tomb (dungeon).** A statued master sleeps in a central chamber. Eight branches lead
-away from it, each ending in a trial room with a floating light. Lighting all eight wakes the
-master; lighting them all within a minute wakes it in hard mode. The map itself is code: a
-layout script builds the 325 × 325-tile dungeon from reusable room types, so a layout change is a
-reviewed diff, not a hand-edited file. The key drops from a rare overworld enemy, or can be bought
-from a camp merchant, five a day, so players have two routes in.
+## History
 
-**Deserted Island (opt-in PvP).** An island where players outside your guild can attack you.
-The rules exist to keep fights fair and stop exploits. Entering gives 15 seconds of protection,
-during which you also can't deal damage. Any attack tags both players for 15 seconds, blocking
-teleports, portals and escape until it expires. Disconnecting mid-fight leaves your character
-vulnerable through the reconnect grace period, rather than spawning a protected duplicate.
-Dungeons opened from the island drop 20% more loot and carry PvP inside.
-
-**Allies.** Summons, turrets, zones, banners and captured pets all share one model. Each ally
-publishes its owner's id, and players choose which other players' allies to draw: all,
-important (the ones that buff or heal you), or only their own. That keeps big fights readable.
-
-**Enemy levelling.** Instead of hand-typing hit points and defense, an enemy is authored with a
-level and a rank, and a build tool bakes its stats from one formula. Difficulty stays consistent,
-and rebalancing means changing the formula once. Arcana has 460+ enemies; I'm moving them onto
-the system as their areas are reworked.
-
-**Equipment systems.** An enchantment station and an attachment station let players customize
-gear, backed by a shared materials economy and a documented API.
-
-## The engineering
-
-| Part | What it is |
-|---|---|
-| Game server | C# / .NET 9: multithreaded game instances, entity behaviour and AI, a binary TCP protocol, and an HTTP app server for accounts |
-| Client | Native Windows app in Haxe/OpenFL, compiled to C++ with hxcpp and MSVC. Earlier versions ran on ActionScript/Adobe AIR, which I also maintained |
-| Persistence | PostgreSQL for accounts and characters, Redis for hot state; money, trades and deaths are written immediately, never deferred |
-| Website | ASP.NET Core storefront that talks to the game server over HMAC-signed internal calls |
-| Delivery | One git commit produces the server image, the website image and the packaged client. Argo CD deploys `develop` to development and `main` to production |
-
-Content is data-driven: items, enemies, behaviours and worlds are XML game data, and maps are
-generated by scripts. The network contract is guarded by tests: every route and packet must be
-registered, and the CI pipeline blocks a deploy on an unreviewed change.
-
-## Testing and playtesting
-
-The server carries about 2,470 automated test cases. The client's logic suites run headless in
-CI, alongside network-contract checks. Over the project, 200–500 unique players have playtested
-Arcana, with 5–20 testers in a typical month, and their feedback drives the roadmap.
-
-## Where it runs
-
-Arcana's development and production environments run on the
-[Tidan Games platform](/projects/tidan-platform), the same cluster that serves this website.
+Forked from Cosmic v2 (09DZL's game), developed as Tidan's Realm VI, renamed Arcana when I
+founded Tidan Games in 2026.

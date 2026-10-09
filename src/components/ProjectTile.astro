@@ -10,7 +10,12 @@ const isSprite = d.cover?.endsWith('.gif');
 ---
 <a class="tile" href={`/projects/${project.id}`}>
   <div class="tile__media">
-    {d.cover ? (
+    {d.video ? (
+      <>
+        <img src={`https://i.ytimg.com/vi/${d.video}/hqdefault.jpg`} alt={`${d.title} video`} loading="lazy" decoding="async" />
+        <span class="play" aria-hidden="true">▶</span>
+      </>
+    ) : d.cover ? (
       <img class={isSprite ? 'pixel' : undefined} src={d.cover} alt={d.coverAlt ?? ''} loading="lazy" decoding="async" />
     ) : (
       <div class="cover-card" aria-hidden="true">

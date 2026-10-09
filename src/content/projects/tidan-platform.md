@@ -1,25 +1,21 @@
 ---
 title: Tidan Games Platform
 org: Tidan Games LLC
-role: Founder · Site Reliability Engineer
+role: Founder · SRE
 dates: Ongoing
 section: studio
 order: 2
-summary: The self-hosted production platform behind my games and studio. Kubernetes managed entirely through GitOps, with data services, observability, email, backups and CI built in.
-tech: [k3s, Argo CD, Helm, HAProxy, cert-manager, CloudNativePG, Redis, OpenBao, Prometheus, Grafana, Loki, GitHub Actions, BuildKit]
+summary: The Kubernetes cluster that runs my games, studio tools, email and CI. Everything is deployed from Git.
+tech: [k3s, Argo CD, Helm, Prometheus, Grafana, Loki, PostgreSQL, Redis, OpenBao, Harbor]
 cover: /media/covers/tidan-platform.svg
-coverAlt: "Illustration: GitHub feeding Argo CD, which runs games, data services and operations on one cluster"
+coverAlt: "Illustration: GitHub feeding Argo CD, which runs games, data and operations"
 stats:
-  - { value: '35', label: 'Argo CD applications' }
-  - { value: '130+', label: 'running pods on one node' }
-  - { value: '37', label: 'TLS certificates, auto-renewed' }
-  - { value: 'Git', label: 'source of truth for every service' }
+  - { value: '35', label: 'apps deployed by Argo CD' }
+  - { value: '130+', label: 'pods on one node' }
+  - { value: '$52/mo', label: 'OVH dedicated server' }
 ---
 
-Everything Tidan Games runs lives on one self-managed Kubernetes node: the game servers, their
-databases, the store, the studio's internal tools, email, monitoring and CI. Every service is a
-Helm chart in its own Git repository, and **Argo CD** keeps the cluster matched to Git. A change
-is a commit; nothing changed by hand survives, because Argo CD reverts drift.
+One server, everything defined in Git. Push a change and Argo CD applies it.
 
 <figure>
 <svg viewBox="0 0 760 430" role="img" aria-labelledby="arch-title" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:var(--font);">
@@ -72,58 +68,13 @@ is a commit; nothing changed by hand survives, because Argo CD reverts drift.
     <text x="500" y="392" text-anchor="middle" style="fill:var(--text-dim);font-size:11.5px">Secrets never live in Git: they are created out of band or read from OpenBao.</text>
   </g>
 </svg>
-<figcaption>How a change reaches production: commit to GitHub, Argo CD notices, the cluster converges.</figcaption>
+<figcaption>Commit to GitHub → Argo CD deploys it.</figcaption>
 </figure>
 
-## Design decisions
+- **Delivery:** Argo CD, GitHub Actions, self-hosted CI runners, Harbor registry.
+- **Data:** PostgreSQL (CloudNativePG), Redis, OpenBao for secrets.
+- **Monitoring:** Prometheus, Grafana, Loki.
+- **Also runs:** the games, a store, email, a wiki, an issue tracker and a support desk.
+- **Security:** non-root containers, no privileged pods, network policies.
 
-**GitOps for everything, including the platform itself.** The app-of-apps pattern means
-registering a new service is a single file in one repository. Rollback is `git revert`, and the
-cluster's state can always be reviewed as a diff. Operators (Argo CD, CloudNativePG,
-cert-manager) are deployed the same way as the applications.
-
-**One node, deliberately.** A single 8-core node is cheap and easy to reason about, and its
-limits are explicit: CPU *requests* are nearly fully committed while real CPU use sits around
-20%. So new workloads request little and burst into idle capacity. Everything needed to
-rebuild the cluster lives in Git.
-
-**Shared data services instead of one database per app.** The studio's wiki, issue tracker and
-support desk each get their own login and database on one CloudNativePG cluster, and their own
-logical database on the shared Redis. That saves about a dozen pods, and it means the monthly
-backup covers every app's data automatically.
-
-**Secrets out of Git.** Charts reference Secrets by name. Values are created out of band or
-written into **OpenBao**. Automation gets an AppRole that can write secrets but can't read the
-system configuration.
-
-## What runs on it
-
-| Area | Pieces |
-|---|---|
-| Delivery | Argo CD, GitHub Actions, self-hosted CI runners (one pool per repo, scaling from zero), rootless BuildKit image builds, Harbor |
-| Edge | HAProxy ingress, cert-manager with Let's Encrypt HTTP-01, MetalLB |
-| Data | PostgreSQL via CloudNativePG, Redis with AOF + RDB and a hard memory cap, OpenBao with Raft storage and automatic unseal |
-| Observability | Prometheus, Grafana, Loki, Alloy |
-| Email | A self-hosted send relay with DKIM signing and a full mailbox server (Rspamd spam filtering to Junk, IMAPS only, Fail2ban), plus webmail |
-| Backups | Monthly jobs dump PostgreSQL, Redis, OpenBao and the game's file data, zip them and deliver them to the studio mailbox |
-| Studio tools | Wiki (Docmost), issue tracker (Plane), player-support desk (Zammad) |
-
-## Hardening choices
-
-- No privileged containers for CI. Container images are built on a **rootless** BuildKit daemon
-  instead of Docker-in-Docker, and a NetworkPolicy lets only runner pods reach it.
-- When an upstream chart ships a privileged init container that only fixes file permissions, I
-  replace it with an unprivileged one that drops every capability.
-  ([The incident that taught me why it was there.](/writing/sticky-bit-postmortem))
-- The mail server isn't an open relay, accepts submission only after authentication, and allows
-  each user to send only as their own address.
-
-## What I'd do next
-
-- **Off-node backups.** The monthly backups are delivered to a mailbox on this same node. The next
-  step is to copy them somewhere the node can't take down with it.
-- **A second node,** so a reboot no longer takes every service down at once.
-
-## Lessons I've written up
-
-The platform's incidents are where most of my writing comes from. See [Writing](/writing).
+**Next:** off-site backups and a second node.
