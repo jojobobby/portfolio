@@ -20,14 +20,14 @@ const isSprite = d.cover?.endsWith('.gif');
     ) : (
       <div class="cover-card" aria-hidden="true">
         <span class="cover-card__org">{d.title}</span>
-        <span class="cover-card__tech">{d.tech.slice(0, 3).join(' · ')}</span>
+        <span class="cover-card__tech">{d.tech.slice(0, 3).join(', ')}</span>
       </div>
     )}
   </div>
   <div class="tile__body">
     <span class="tile__role">{d.role}</span>
     <span class="tile__title">{d.title}</span>
-    <span class="tile__org">{d.org} · {d.dates}</span>
+    <span class="tile__org">{d.org}, {d.dates}</span>
     <span class="tile__summary">{d.summary}</span>
   </div>
 </a>

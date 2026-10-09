@@ -1,13 +1,14 @@
 ---
 title: Cosmic Realm
 org: Independent
-role: Founder · Lead Developer
-dates: 2018 – 2026
+role: Founder, Lead Developer
+dates: 2018 to 2026
 section: studio
 order: 3
 summary: My first game. Started in 2018 as Tidan's Realm, renamed Cosmic Realm in 2020.
 tech: [C#, ActionScript 3, Adobe AIR, Redis, k3s, Argo CD]
 cover: /media/covers/cosmic-realm.svg
+video: bGHpJcUXNCQ
 coverAlt: "Illustration: a ringed planet in a starfield"
 stats:
   - { value: '3,000', label: 'registered accounts' }

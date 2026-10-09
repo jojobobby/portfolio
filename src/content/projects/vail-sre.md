@@ -1,8 +1,8 @@
 ---
-title: AWS ECS → Kubernetes
+title: AWS ECS to Kubernetes
 org: Vail Systems
 role: SRE Apprentice
-dates: Aug 2024 – Present
+dates: Aug 2024 to Present
 section: professional
 order: 1
 summary: Led the move of production from AWS ECS to self-managed Kubernetes.

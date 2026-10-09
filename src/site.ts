@@ -8,7 +8,7 @@ export const SITE = {
   github: 'https://github.com/jojobobby',
   linkedin: 'https://www.linkedin.com/in/rapheal-robinson-598743167',
   youtube: 'https://www.youtube.com/@RalphOfc',
-  location: 'Chicago area · open to relocation',
+  location: 'Chicago area, open to relocation',
 };
 
 export const NAV = [

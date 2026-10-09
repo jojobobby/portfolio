@@ -289,4 +289,4 @@ p, li { color: var(--text); }
 .vid__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s ease; }
 .vid:hover .vid__thumb img { transform: scale(1.04); }
 .vid__title { font-weight: 600; font-size: 0.95rem; }
-.contact { text-align: center; margin-top: 48px; color: var(--text-dim); }
+.contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 48px; }

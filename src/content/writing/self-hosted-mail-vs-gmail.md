@@ -11,7 +11,7 @@ cluster got its own mail system: a send-only relay that signs outgoing mail, and
 server with spam filtering. The first test email bounced. So did the next four. Each rejection
 was a different, precise message, and each one taught me a rule the big providers enforce.
 
-## 1. `550-5.7.1` — no Message-ID
+## 1. `550-5.7.1`: no Message-ID
 
 Gmail rejected the very first message because it had no `Message-ID` header. My backup job
 built the email by hand in Python and only set From, To and Subject. Gmail treats a missing
@@ -24,7 +24,7 @@ msg["Date"] = email.utils.formatdate(localtime=False)
 msg["Message-ID"] = email.utils.make_msgid(domain="tidangames.com")
 ```
 
-## 2. `550-5.7.26` — neither SPF nor DKIM passed
+## 2. `550-5.7.26`: neither SPF nor DKIM passed
 
 With valid headers, the next bounce was about authentication: the domain published no SPF
 record, so Gmail had no evidence the server was allowed to send for it. The relay was already
@@ -45,7 +45,7 @@ The record has to be split into several quoted strings, which receivers join bac
 "v=DKIM1; k=rsa; p=MIIBIjANBgkqh…first 200 chars…" "…the rest of the key…"
 ```
 
-## 4. `504` — need a fully-qualified HELO
+## 4. `504`: need a fully-qualified HELO
 
 Once the relay accepted the job's mail, my own inbox server rejected some senders because they
 introduced themselves with a bare container hostname. Mail servers expect the `HELO`/`EHLO` name

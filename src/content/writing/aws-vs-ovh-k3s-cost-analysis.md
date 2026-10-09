@@ -2,7 +2,7 @@
 title: 'AWS vs. OVH for a production k3s cluster: a 1-year and 10-year cost analysis'
 date: 2026-08-30
 kind: engineering
-summary: I priced a single-node k3s cluster with 1 TB of storage on AWS and OVHcloud at three tiers. OVH came out 58–87% cheaper, mostly because AWS bills storage and egress by usage.
+summary: I priced a single-node k3s cluster with 1 TB of storage on AWS and OVHcloud at three tiers. OVH came out 58 to 87% cheaper, mostly because AWS bills storage and egress by usage.
 project: vail-sre
 ---
 
@@ -39,7 +39,7 @@ around compute.
 
 | | AWS (usage-based) | OVH (flat-rate) |
 |---|---|---|
-| 1 TB block storage | ~$80/mo (gp3 at $0.08/GB) | included, or ~$10–20/mo on the smallest tier |
+| 1 TB block storage | ~$80/mo (gp3 at $0.08/GB) | included, or ~$10 to $20/mo on the smallest tier |
 | Egress | ~$0.09/GB after the first 100 GB | included, unmetered |
 | Budget | risk of "bill shock" as traffic grows | fixed monthly cost |
 

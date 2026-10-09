@@ -1,8 +1,8 @@
 ---
 title: Arcana
 org: Tidan Games LLC
-role: Founder · Lead Engineer & Designer
-dates: 2023 – Present
+role: Founder, Lead Engineer & Designer
+dates: 2023 to Present
 section: studio
 order: 1
 summary: A pixel-art MMORPG. I design it, build it and run it.
@@ -14,7 +14,7 @@ stats:
   - { value: '818', label: 'player accounts' }
   - { value: '2,000+', label: 'of my commits' }
   - { value: '~2,470', label: 'automated tests' }
-  - { value: '200–500', label: 'playtesters' }
+  - { value: '200 to 500', label: 'playtesters' }
 ---
 
 Dungeons, an open overworld, guilds, trading, crafting and PvP. I write the server and the

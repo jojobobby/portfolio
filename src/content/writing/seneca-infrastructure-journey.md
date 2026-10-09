@@ -29,7 +29,7 @@ the journal. Reliability on a single host went up immediately.
 **What changed next:** the scope. More projects needed deploying the same way, and the
 deployment configuration needed to live with the code, not on a server.
 
-## 3. A full AWS ECS deployment, driven by CI/CD (Aug 2024 – 2025)
+## 3. A full AWS ECS deployment, driven by CI/CD (Aug 2024 to 2025)
 
 Next came a proper cloud deployment. In August 2024 I set up GitHub Actions to **build and push
 images to ECR for all four of the Business Locator's applications** and deploy them as ECS
@@ -53,7 +53,7 @@ parts a managed cloud hides from you:
 That personal cluster became the blueprint for my studio's infrastructure, the
 [Tidan Games platform](/projects/tidan-platform).
 
-## 5. Seneca Foundation's official cluster (Sep 2025 – 2026)
+## 5. Seneca Foundation's official cluster (Sep 2025 to 2026)
 
 Then I applied all of it to **Seneca Foundation's official Kubernetes cluster**, under the
 supervision of **Harrison**, my boss and training mentor during my apprenticeship. The git
@@ -65,7 +65,7 @@ history shows the build-out:
 | Oct 2025 | The first Seneca apps deployed through it |
 | Jan 2026 | Helm configuration; load balancer and certificates as cluster infrastructure |
 | Feb 2026 | A self-hosted container registry and Sealed Secrets |
-| Feb – Mar 2026 | Ingress: NGINX (F5, then community), then cert-manager with a cluster issuer |
+| Feb to Mar 2026 | Ingress: NGINX (F5, then community), then cert-manager with a cluster issuer |
 | Mar 2026 | PostgreSQL as a chart, with a network policy and a disruption budget |
 | Aug 2026 | Terraform + Ansible provisioning, and a [cost analysis of where to host it](/writing/aws-vs-ovh-k3s-cost-analysis) |
 

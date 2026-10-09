@@ -7,7 +7,7 @@ const jobs = [
   {
     title: 'Site Reliability Engineer Apprentice',
     org: 'Vail Systems',
-    when: 'Aug 2024 – Present',
+    when: 'Aug 2024 to Present',
     link: '/projects/vail-sre',
     points: [
       'Led the migration of production workloads from AWS ECS/ECR to self-managed Kubernetes (k3s), with Helm and Argo CD GitOps across development, staging and production.',
@@ -21,7 +21,7 @@ const jobs = [
   {
     title: 'Software Engineer Intern',
     org: 'Vail Systems',
-    when: 'Mar 2023 – Aug 2024',
+    when: 'Mar 2023 to Aug 2024',
     link: '/projects/vail-software',
     points: [
       'Delivered full-stack features weekly in React, TypeScript, Node.js, Express, Prisma and SQL.',
@@ -31,7 +31,7 @@ const jobs = [
   {
     title: 'Founder',
     org: 'Tidan Games LLC',
-    when: 'Sep 2026 – Present',
+    when: 'Sep 2026 to Present',
     link: '/projects/arcana',
     points: [
       'Run an independent multiplayer game studio, leading engineers, artists and testers across game servers, clients, APIs, databases and infrastructure.',
@@ -41,7 +41,7 @@ const jobs = [
   {
     title: 'Lead Software Engineer & Owner',
     org: 'Cosmic Realm (originally Tidan’s Realm)',
-    when: 'Aug 2018 – 2026',
+    when: 'Aug 2018 to 2026',
     link: '/projects/cosmic-realm',
     points: [
       'Built and operated a C# multiplayer game server: 3,000 registered accounts, 200 peak concurrent players.',
@@ -52,7 +52,7 @@ const jobs = [
   {
     title: 'Software Engineer Apprentice',
     org: 'Seneca Foundation',
-    when: 'Jul 2022 – Apr 2023',
+    when: 'Jul 2022 to Apr 2023',
     link: '/projects/seneca',
     points: ['Built full-stack applications with Java, TypeScript and MySQL under senior-engineer mentorship.'],
   },
@@ -75,7 +75,7 @@ const skills = [
       SRE at Vail Systems and founder of Tidan Games. I've been making multiplayer games since 2018,
       and running them is what got me into infrastructure.
     </p>
-    <p class="dim">Chicago area · open to relocation · English and Spanish · studying for the CKA.</p>
+    <p class="dim">Based near Chicago and open to relocation. I speak English and Spanish, and I'm studying for the CKA.</p>
   </div>
   <div class="actions">
     <a class="btn" href={`mailto:${SITE.email}`}>Email me</a>
@@ -90,7 +90,7 @@ const skills = [
     <h2>Experience</h2>
     {jobs.map((j) => (
       <div class="resume-job">
-        <h3><a href={j.link}>{j.title}</a> · {j.org}</h3>
+        <h3><a href={j.link}>{j.title}</a>, {j.org}</h3>
         <div class="when">{j.when}</div>
         <ul>{j.points.map((p) => <li>{p}</li>)}</ul>
       </div>
@@ -108,7 +108,7 @@ const skills = [
     <h2>Education & certification</h2>
     <ul>
       <li><strong>Associate in Arts, Computer Science</strong>, Prairie State College, Chicago Heights, IL (Jul 2025)</li>
-      <li><strong>Google IT Support Certificate</strong> (May 2026) · <a href="https://credly.com/go/aJ6UHHbO">verify on Credly</a></li>
+      <li><strong>Google IT Support Certificate</strong> (May 2026), <a href="https://credly.com/go/aJ6UHHbO">verify on Credly</a></li>
       <li><strong>Certified Kubernetes Administrator (CKA)</strong>, in progress</li>
     </ul>
   </div>

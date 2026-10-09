@@ -1,7 +1,7 @@
 ---
 title: Tidan Games Platform
 org: Tidan Games LLC
-role: Founder · SRE
+role: Founder, SRE
 dates: Ongoing
 section: studio
 order: 2
@@ -41,7 +41,7 @@ One server, everything defined in Git. Push a change and Argo CD applies it.
     <text x="276" y="36" style="fill:var(--accent);font-weight:700">k3s node: 8 cores, 64 GB</text>
     <rect x="276" y="48" width="448" height="56" rx="8" style="fill:var(--bg-raised);stroke:var(--line)"/>
     <text x="292" y="72" style="fill:var(--text);font-weight:700">Argo CD</text>
-    <text x="292" y="92" style="fill:var(--text-dim);font-size:11.5px">app-of-apps · auto-sync · self-heal · prune</text>
+    <text x="292" y="92" style="fill:var(--text-dim);font-size:11.5px">app-of-apps, auto-sync, self-heal, prune</text>
     <rect x="276" y="300" width="448" height="56" rx="8" style="fill:var(--bg-raised);stroke:var(--line)"/>
     <text x="292" y="324" style="fill:var(--text);font-weight:700">Edge: HAProxy ingress + cert-manager</text>
     <text x="292" y="344" style="fill:var(--text-dim);font-size:11.5px">Let's Encrypt certificates, issued and renewed automatically</text>
@@ -49,7 +49,7 @@ One server, everything defined in Git. Push a change and Argo CD applies it.
     <text x="290" y="140" style="fill:var(--warm);font-weight:700">Workloads</text>
     <text x="290" y="162" style="fill:var(--text);font-size:12px">Arcana prod + dev</text>
     <text x="290" y="180" style="fill:var(--text);font-size:12px">game stores</text>
-    <text x="290" y="198" style="fill:var(--text);font-size:12px">wiki · tasks</text>
+    <text x="290" y="198" style="fill:var(--text);font-size:12px">wiki, tasks</text>
     <text x="290" y="216" style="fill:var(--text);font-size:12px">support desk</text>
     <text x="290" y="234" style="fill:var(--text);font-size:12px">this website</text>
     <rect x="430" y="118" width="140" height="168" rx="8" style="fill:var(--bg-raised);stroke:var(--line)"/>
@@ -61,14 +61,14 @@ One server, everything defined in Git. Push a change and Argo CD applies it.
     <rect x="584" y="118" width="140" height="168" rx="8" style="fill:var(--bg-raised);stroke:var(--line)"/>
     <text x="598" y="140" style="fill:var(--warm);font-weight:700">Operations</text>
     <text x="598" y="162" style="fill:var(--text);font-size:12px">Prometheus</text>
-    <text x="598" y="180" style="fill:var(--text);font-size:12px">Grafana · Loki</text>
+    <text x="598" y="180" style="fill:var(--text);font-size:12px">Grafana, Loki</text>
     <text x="598" y="198" style="fill:var(--text);font-size:12px">mail relay + inbox</text>
     <text x="598" y="216" style="fill:var(--text);font-size:12px">monthly backups</text>
     <text x="598" y="234" style="fill:var(--text);font-size:12px">CI runners</text>
     <text x="500" y="392" text-anchor="middle" style="fill:var(--text-dim);font-size:11.5px">Secrets never live in Git: they are created out of band or read from OpenBao.</text>
   </g>
 </svg>
-<figcaption>Commit to GitHub → Argo CD deploys it.</figcaption>
+<figcaption>Commit to GitHub and Argo CD deploys it.</figcaption>
 </figure>
 
 - **Delivery:** Argo CD, GitHub Actions, self-hosted CI runners, Harbor registry.

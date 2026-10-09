@@ -2,7 +2,7 @@
 title: Full-Stack Engineering
 org: Vail Systems
 role: Software Engineer Intern
-dates: Mar 2023 – Aug 2024
+dates: Mar 2023 to Aug 2024
 section: professional
 order: 2
 summary: Shipped features weekly in React, Node.js and SQL.

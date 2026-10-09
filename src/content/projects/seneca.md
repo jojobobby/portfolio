@@ -2,7 +2,7 @@
 title: Software Engineering Apprenticeship
 org: Seneca Foundation
 role: Apprentice
-dates: Jul 2022 – Apr 2023
+dates: Jul 2022 to Apr 2023
 section: earlier
 order: 11
 summary: My first engineering role.

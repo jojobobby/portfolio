@@ -7,7 +7,7 @@ interface Props {
   description?: string;
 }
 const { title, description = SITE.description } = Astro.props;
-const pageTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.title}`;
+const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | ${SITE.title}`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site);
 ---
@@ -74,7 +74,7 @@ const canonical = new URL(path, Astro.site);
     <footer class="footer">
       <div class="wrap footer__row">
         <span>© {new Date().getFullYear()} {SITE.name}</span>
-        <span class="mono">Self-hosted on k3s · deployed by Argo CD from git</span>
+        <span class="mono">Self-hosted on k3s and deployed by Argo CD from Git</span>
       </div>
     </footer>
   </body>

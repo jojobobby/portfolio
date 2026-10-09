@@ -23,7 +23,7 @@ const showShot = !d.video && d.cover && /\.(jpe?g|png|webp)$/i.test(d.cover);
 <Base title={d.title} description={d.summary}>
   <p><a href="/">← All projects</a></p>
   <header class="project-head">
-    <span class="tile__role">{d.role} · {d.dates}</span>
+    <span class="tile__role">{d.role}, {d.dates}</span>
     <h1>{d.title}</h1>
     <p class="lede">{d.summary}</p>
     {d.tech.length > 0 && <div class="facts">{d.tech.map((t) => <span class="chip">{t}</span>)}</div>}
