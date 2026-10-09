@@ -3,7 +3,7 @@ title: 'A list of 52,000 enemies froze the server'
 date: 2026-10-09
 kind: engineering
 tag: learning
-summary: Swapping a List for a HashSet took /killall from 26 seconds of frozen server to about 1.
+summary: My biggest speedup on a single call. Swapping a List for a HashSet took /killall from 26 seconds of frozen server to about 1.
 project: arcana
 ---
 

@@ -56,8 +56,9 @@ From Cosmic v2 in 2021, through Tidan's Realm, to Arcana today.
 
 Two case studies:
 
-- [A list of 52,000 enemies froze the server](/writing/list-that-froze-the-server): Arcana,
-  `List` to `HashSet`, 26 seconds down to about 1.
+- [A list of 52,000 enemies froze the server](/writing/list-that-froze-the-server): my biggest
+  speedup on a single call. One `/killall` in Arcana went from 26 seconds to about 1, with
+  `List` swapped for `HashSet`.
 - [Only check the parts of the map where players are](/writing/only-check-where-players-are):
   Cosmic Realm, tracking occupied chunks instead of scanning 16,384 every tick.
 
