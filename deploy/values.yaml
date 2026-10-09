@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/jojobobby/portfolio
   # Set by CI on every push to main (the short commit SHA). Do not edit by hand.
-  tag: "d6a1f53"
+  tag: "32e3089"
   pullPolicy: IfNotPresent
 
 # Two replicas so a rollout or a pod restart never takes the site down.
