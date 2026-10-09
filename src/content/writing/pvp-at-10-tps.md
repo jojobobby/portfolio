@@ -1,5 +1,5 @@
 ---
-title: PvP at 10 TPS
+title: 'Learning: Frustrations with PvP combat networking in TPS game servers'
 date: 2026-10-09
 kind: engineering
 summary: Projectiles, movement and lag in a game that only updates 10 times a second.

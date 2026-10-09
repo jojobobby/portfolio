@@ -1,5 +1,5 @@
 ---
-title: From compose to Kubernetes
+title: 'Learning: From Podman Compose to systemd services to Kubernetes clusters'
 date: 2026-10-06
 kind: engineering
 summary: How Seneca Foundation's infrastructure got rebuilt five times.

@@ -1,5 +1,5 @@
 ---
-title: AWS vs OVH costs
+title: 'Consideration: AWS vs OVH costs'
 date: 2026-08-30
 kind: engineering
 summary: What a k3s cluster costs on AWS and OVH, over 1 year and 10.

@@ -1,5 +1,5 @@
 ---
-title: The missing sticky bit
+title: 'Postmortem: Removing a privileged init container broke Zammad''s temp directory'
 date: 2026-09-23
 kind: postmortem
 summary: A support desk 500 caused by hardening one thing too far.

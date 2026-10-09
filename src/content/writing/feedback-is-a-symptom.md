@@ -1,5 +1,5 @@
 ---
-title: Feedback is a symptom
+title: 'Takeaway: User feedback expresses symptoms, never the problem or the solution'
 date: 2026-10-09
 kind: design
 summary: Players tell you where it hurts, not what to fix. And why the grind should be fun.

@@ -1,5 +1,5 @@
 ---
-title: Playtest constantly
+title: 'Adopted: The importance of CI-UT (continuous integration user testing) in game and system design'
 date: 2026-10-09
 kind: design
 summary: Why I build games in a loop with playtest groups of 50+ players.
@@ -11,7 +11,8 @@ telling you what's wrong.
 
 For Arcana we run playtest groups of 50+ players. Every update goes to them first. They play
 it, break it and tell us what felt bad. We fix it, and the next update goes back to the same
-group. That loop doesn't stop.
+group. That loop doesn't stop. I call it CI-UT: continuous integration user testing. Every
+build goes to real users, the same way every commit goes through CI.
 
 ## Why 50+
 

@@ -1,5 +1,5 @@
 ---
-title: Getting past Gmail
+title: 'Postmortem: Gmail compliance when deploying a fresh company mail server'
 date: 2026-09-21
 kind: engineering
 summary: Five bounces from my own mail server, and what each one taught me.
