@@ -1,7 +1,8 @@
 ---
-title: 'Takeaway: Build UI from a few components, not one-off screens'
+title: 'Build UI from a few components, not one-off screens'
 date: 2026-10-09
 kind: design
+tag: takeaway
 summary: How I learned UI over eight years, from hand-placed screens to a component system with declared states.
 project: arcana
 ---

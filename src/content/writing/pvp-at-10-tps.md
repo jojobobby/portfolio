@@ -1,7 +1,8 @@
 ---
-title: 'Learning: Frustrations with PvP combat networking in TPS game servers'
+title: 'Frustrations with PvP combat networking in TPS game servers'
 date: 2026-10-09
 kind: engineering
+tag: learning
 summary: Projectiles, movement and lag in a game that only updates 10 times a second.
 project: arcana
 ---

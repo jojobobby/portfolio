@@ -30,6 +30,8 @@ const writing = defineCollection({
     date: z.coerce.date(),
     summary: z.string(),
     kind: z.enum(['postmortem', 'engineering', 'design', 'devlog']),
+    // Shown after the kind, e.g. "design takeaway".
+    tag: z.enum(['takeaway', 'learning', 'adopted', 'postmortem', 'consideration']).optional(),
     project: z.string().optional(),
   }),
 });

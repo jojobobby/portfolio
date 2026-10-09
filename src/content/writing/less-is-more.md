@@ -1,7 +1,8 @@
 ---
-title: 'Takeaway: User overload is real. Less early is more early, and more later is more later'
+title: 'User overload is real. Less early is more early, and more later is more later'
 date: 2026-10-09
 kind: design
+tag: takeaway
 summary: Too many features too early can ruin a good game. Unlock them over time instead.
 project: arcana
 ---

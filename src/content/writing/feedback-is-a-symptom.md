@@ -1,7 +1,8 @@
 ---
-title: 'Takeaway: User feedback expresses symptoms, never the problem or the solution'
+title: 'User feedback expresses symptoms, never the problem or the solution'
 date: 2026-10-09
 kind: design
+tag: takeaway
 summary: Players tell you where it hurts, not what to fix. And why the grind should be fun.
 project: arcana
 ---

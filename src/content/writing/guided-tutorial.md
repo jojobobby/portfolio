@@ -1,7 +1,8 @@
 ---
-title: 'Learning: A guided tutorial beats a room with 100 options'
+title: 'A guided tutorial beats a room with 100 options'
 date: 2026-10-09
 kind: design
+tag: learning
 summary: Why Arcana's tutorial became a guided map instead of an open list of quests.
 project: arcana
 ---

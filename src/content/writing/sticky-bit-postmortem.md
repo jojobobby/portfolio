@@ -1,7 +1,8 @@
 ---
-title: 'Postmortem: Removing a privileged init container broke Zammad''s temp directory'
+title: 'Removing a privileged init container broke Zammad''s temp directory'
 date: 2026-09-23
-kind: postmortem
+kind: engineering
+tag: postmortem
 summary: A support desk 500 caused by hardening one thing too far.
 project: tidan-platform
 ---

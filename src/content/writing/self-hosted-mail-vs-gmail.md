@@ -1,7 +1,8 @@
 ---
-title: 'Postmortem: Gmail compliance when deploying a fresh company mail server'
+title: 'Gmail compliance when deploying a fresh company mail server'
 date: 2026-09-21
 kind: engineering
+tag: postmortem
 summary: Five bounces from my own mail server, and what each one taught me.
 project: tidan-platform
 ---

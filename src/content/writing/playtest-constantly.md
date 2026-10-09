@@ -1,7 +1,8 @@
 ---
-title: 'Adopted: The importance of CI-UT (continuous integration user testing) in game and system design'
+title: 'The importance of CI-UT (continuous integration user testing) in game and system design'
 date: 2026-10-09
 kind: design
+tag: adopted
 summary: Why I build games in a loop with playtest groups of 50+ players.
 project: arcana
 ---

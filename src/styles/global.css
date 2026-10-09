@@ -293,3 +293,5 @@ p, li { color: var(--text); }
 .vid__date { font-family: var(--mono); font-size: 0.78rem; color: var(--warm); margin-top: -4px; }
 .video__date { margin: -10px 0 18px; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); }
 .hero__video .video__date { margin: 8px 0 0; }
+
+.post-date { color: var(--text-dim); margin-left: 10px; }

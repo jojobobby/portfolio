@@ -1,7 +1,8 @@
 ---
-title: 'Learning: From Podman Compose to systemd services to Kubernetes clusters'
+title: 'From Podman Compose to systemd services to Kubernetes clusters'
 date: 2026-10-06
 kind: engineering
+tag: learning
 summary: How Seneca Foundation's infrastructure got rebuilt five times.
 project: vail-sre
 ---
