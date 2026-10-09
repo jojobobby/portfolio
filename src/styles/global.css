@@ -104,11 +104,14 @@ p, li { color: var(--text); }
 .tile__media { aspect-ratio: 16 / 9; background: var(--bg-sunken); display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid var(--line); }
 .tile__media img { width: 100%; height: 100%; object-fit: cover; image-rendering: auto; }
 .tile__media .pixel { image-rendering: pixelated; object-fit: contain; width: 70%; height: 80%; }
-.cover-card { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 18px; background:
-  radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 60%),
-  linear-gradient(160deg, var(--bg-raised), var(--bg-sunken)); }
-.cover-card__org { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
-.cover-card__tech { font-family: var(--mono); font-size: 0.78rem; color: var(--accent-strong); }
+/* Real code as a tile's picture: a slice of the file, fading out at the bottom. */
+.tile__code { position: relative; width: 100%; height: 100%; padding: 14px 16px; text-align: left; background: var(--bg-sunken); overflow: hidden; display: flex; flex-direction: column; justify-content: safe center; }
+.tile__code-file { display: block; font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); margin-bottom: 8px; }
+.tile__code pre { margin: 0; font-family: var(--mono); font-size: 0.8rem; line-height: 1.5; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+.tile__code::after { content: ''; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(transparent, var(--bg-sunken)); }
+/* Work with nothing public to show: text, no picture. */
+.tile--text .tile__body { flex: 1; padding-top: 18px; }
+.tile__highlights { margin: 10px 0 0; padding-left: 18px; color: var(--text-dim); font-size: 0.9rem; display: grid; gap: 4px; }
 .tile__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
 .tile__role { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--warm); }
 .tile__title { font-size: 1.15rem; font-weight: 700; }
@@ -199,10 +202,13 @@ p, li { color: var(--text); }
   background: rgba(0,0,0,0.55); padding: 3px 8px; border-radius: 6px; }
 
 /* ===== Home: numbers strip ===== */
-.numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line);
-  border-radius: var(--radius); overflow: hidden; margin: 34px 0 10px; }
-.number { background: var(--bg-raised); padding: 16px 18px; }
-.number__value { font-size: 1.7rem; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; line-height: 1.1; }
+.highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 34px 0 10px; }
+.highlights__area { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--warm); margin: 0 0 8px; }
+.numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; }
+.number { background: var(--bg-raised); padding: 14px 16px; text-decoration: none; color: var(--text); transition: background 0.15s ease; }
+.number:hover { background: var(--bg-sunken); color: var(--text); }
+.number__value { font-size: 1.35rem; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; line-height: 1.15; }
 .number__label { color: var(--text-dim); font-size: 0.86rem; margin-top: 4px; }
 
 /* ===== Home: what I do ===== */
@@ -251,7 +257,7 @@ p, li { color: var(--text); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 28px; }
   .hero__shot { transform: none; }
-  .numbers { grid-template-columns: repeat(2, 1fr); }
+  .highlights { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: 1fr; gap: 16px; padding-left: 26px; }
   .timeline::before { left: 7px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; background: linear-gradient(180deg, var(--warm), var(--accent)); }
   .timeline__item a { padding: 0; }
@@ -330,3 +336,19 @@ p, li { color: var(--text); }
 .cform__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .cform__status { color: var(--text-dim); font-size: 0.9rem; }
 @media (max-width: 560px) { .cform__row { grid-template-columns: 1fr; } }
+
+/* Project page: real code under the header, labelled with its file. */
+.code-figure { margin: 0 0 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-sunken); overflow: hidden; }
+.code-figure figcaption { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); padding: 8px 14px; border-bottom: 1px solid var(--line); }
+.code-figure pre { margin: 0; padding: 14px; overflow-x: auto; font-family: var(--mono); font-size: 0.84rem; line-height: 1.55; }
+
+/* Animated sprites from the game, at pixel scale. */
+.sprites { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; margin: 8px 0 20px; }
+.sprites figure { margin: 0; display: grid; justify-items: center; gap: 4px; }
+.sprites img { image-rendering: pixelated; height: 96px; width: auto; }
+.sprites figcaption { font-size: 0.75rem; color: var(--text-dim); }
+
+/* Diff lines in code snippets. */
+.tile__code .add, .code-figure .add { color: #7ee2a8; background: rgba(46, 160, 67, 0.15); }
+.tile__code .del, .code-figure .del { color: #ff9b9b; background: rgba(248, 81, 73, 0.15); }
+.tile__code pre span, .code-figure pre span { display: block; }

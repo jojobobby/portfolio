@@ -7,9 +7,7 @@ section: studio
 order: 3
 summary: My first game. Started in 2018 as Tidan's Realm, renamed Cosmic Realm in 2020.
 tech: [C# / .NET 10, ASP.NET Core, WPF / XAML, ActionScript 3, Adobe AIR, Redis, k3s, Argo CD]
-cover: /media/covers/cosmic-realm.svg
 video: bGHpJcUXNCQ
-coverAlt: "Illustration: a ringed planet in a starfield"
 stats:
   - { value: '3,000', label: 'registered accounts' }
   - { value: '200', label: 'peak players online' }

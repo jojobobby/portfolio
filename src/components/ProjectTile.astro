@@ -7,27 +7,38 @@ interface Props {
 const { project } = Astro.props;
 const d = project.data;
 const isSprite = d.cover?.endsWith('.gif');
+// Tiles only show real things: gameplay video, a screenshot, or real code. Work with nothing
+// public to show gets a text tile with its highlights instead of a drawn picture.
+const hasMedia = Boolean(d.video || d.cover || d.snippet);
+// A snippet can be a diff: lines starting with + or - are coloured as added or removed.
+const lines = (d.snippet?.code ?? '').trimEnd().split(/\r?\n/);
+const mark = (l: string) => (l.startsWith('+') ? 'add' : l.startsWith('-') ? 'del' : undefined);
 ---
-<a class="tile" href={`/projects/${project.id}`}>
-  <div class="tile__media">
-    {d.video ? (
-      <>
-        <img src={`/media/yt/${d.video}.jpg`} alt={`${d.title} video`} loading="lazy" decoding="async" />
-        <span class="play" aria-hidden="true">▶</span>
-      </>
-    ) : d.cover ? (
-      <img class={isSprite ? 'pixel' : undefined} src={d.cover} alt={d.coverAlt ?? ''} loading="lazy" decoding="async" />
-    ) : (
-      <div class="cover-card" aria-hidden="true">
-        <span class="cover-card__org">{d.title}</span>
-        <span class="cover-card__tech">{d.tech.slice(0, 3).join(', ')}</span>
-      </div>
-    )}
-  </div>
+<a class:list={['tile', { 'tile--text': !hasMedia }]} href={`/projects/${project.id}`}>
+  {hasMedia && (
+    <div class="tile__media">
+      {d.video ? (
+        <>
+          <img src={`/media/yt/${d.video}.jpg`} alt={`${d.title} video`} loading="lazy" decoding="async" />
+          <span class="play" aria-hidden="true">▶</span>
+        </>
+      ) : d.cover ? (
+        <img class={isSprite ? 'pixel' : undefined} src={d.cover} alt={d.coverAlt ?? ''} loading="lazy" decoding="async" />
+      ) : (
+        <div class="tile__code">
+          <span class="tile__code-file">{d.snippet!.file}</span>
+          <pre><code>{lines.map((l) => <span class={mark(l)}>{l}</span>)}</code></pre>
+        </div>
+      )}
+    </div>
+  )}
   <div class="tile__body">
     <span class="tile__role">{d.role}</span>
     <span class="tile__title">{d.title}</span>
     <span class="tile__org">{d.org}, {d.dates}</span>
     <span class="tile__summary">{d.summary}</span>
+    {!hasMedia && d.highlights.length > 0 && (
+      <ul class="tile__highlights">{d.highlights.map((h) => <li>{h}</li>)}</ul>
+    )}
   </div>
 </a>

@@ -20,6 +20,9 @@ const d = project.data;
 const { Content } = await render(project);
 const related = (await getCollection('writing')).filter((w) => w.data.project === project.id);
 const showShot = !d.video && d.cover && /\.(jpe?g|png|webp)$/i.test(d.cover);
+// Snippet lines starting with + or - are a diff: coloured as added or removed.
+const lines = (d.snippet?.code ?? '').trimEnd().split(/\r?\n/);
+const mark = (l: string) => (l.startsWith('+') ? 'add' : l.startsWith('-') ? 'del' : undefined);
 ---
 <Base title={d.title} description={d.summary}>
   <p><a href="/">← All projects</a></p>
@@ -32,6 +35,12 @@ const showShot = !d.video && d.cover && /\.(jpe?g|png|webp)$/i.test(d.cover);
 
   {d.video && <YouTube id={d.video} title={`${d.title} gameplay`} date={videoDate(d.video)} />}
   {showShot && <figure class="hero-media"><img src={d.cover} alt={d.coverAlt ?? ''} /></figure>}
+  {!d.video && !showShot && d.snippet && (
+    <figure class="code-figure">
+      <figcaption>{d.snippet.file}</figcaption>
+      <pre><code>{lines.map((l) => <span class={mark(l)}>{l}</span>)}</code></pre>
+    </figure>
+  )}
 
   {d.stats.length > 0 && (
     <div class="stats">

@@ -12,11 +12,35 @@ const studio = all.filter((p) => p.data.section === 'studio');
 const earlier = all.filter((p) => p.data.section === 'earlier');
 const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const numbers = [
-  { value: '8 yrs', label: 'making multiplayer games' },
-  { value: '818', label: 'Arcana players' },
-  { value: '35', label: 'apps on my cluster' },
-  { value: 'ECS to k3s', label: 'migration I led at Vail' },
+// The headline facts, each linked to the page or post that backs it up.
+const highlights = [
+  {
+    area: 'Game development',
+    items: [
+      { value: '818', label: 'Arcana player accounts', href: '/projects/arcana' },
+      { value: '3,000', label: 'Cosmic Realm accounts over 8 years', href: '/projects/cosmic-realm' },
+      { value: '99.71%', label: 'PvP hits landing in the lag window, up from 97.87%', href: '/writing/pvp-at-10-tps' },
+      { value: '50+', label: 'players test every update before it ships', href: '/writing/playtest-constantly' },
+    ],
+  },
+  {
+    area: 'Site reliability',
+    items: [
+      { value: '35', label: 'apps on my own k3s cluster, all deployed from Git', href: '/projects/tidan-platform' },
+      { value: '3', label: 'environments I moved from AWS ECS to k3s at Vail', href: '/projects/vail-sre' },
+      { value: '62%', label: 'cheaper per year on OVH than AWS, from my cost analysis', href: '/writing/aws-vs-ovh-k3s-cost-analysis' },
+      { value: '7.4 s to 0.1 s', label: 'start-up for 100 players at once, with HTTP caching', href: '/projects/csharp-dotnet' },
+    ],
+  },
+  {
+    area: 'Software engineering',
+    items: [
+      { value: '26 s to 1 s', label: 'server freeze fixed by swapping a List for a HashSet', href: '/writing/list-that-froze-the-server' },
+      { value: '16,384 to 10', label: 'map chunks searched per tick with 10 players online', href: '/writing/only-check-where-players-are' },
+      { value: '2,400+', label: 'automated tests in Arcana', href: '/projects/arcana' },
+      { value: '3,500+', label: 'of my commits across Arcana and Cosmic Realm', href: '/projects/csharp-dotnet' },
+    ],
+  },
 ];
 
 // Videos: src/data/videos.json (oldest first). Thumbnails are local copies: scripts/fetch-thumbnails.mjs.
@@ -37,9 +61,16 @@ const numbers = [
     </div>
   </section>
 
-  <section class="numbers" aria-label="At a glance">
-    {numbers.map((n) => (
-      <div class="number"><div class="number__value">{n.value}</div><div class="number__label">{n.label}</div></div>
+  <section class="highlights" aria-label="Highlights">
+    {highlights.map((g) => (
+      <div class="highlights__group">
+        <h2 class="highlights__area">{g.area}</h2>
+        <div class="numbers">
+          {g.items.map((n) => (
+            <a class="number" href={n.href}><div class="number__value">{n.value}</div><div class="number__label">{n.label}</div></a>
+          ))}
+        </div>
+      </div>
     ))}
   </section>
 

@@ -7,8 +7,21 @@ section: studio
 order: 2
 summary: The Kubernetes cluster that runs my games, studio tools, email and CI. Everything is deployed from Git.
 tech: [k3s, Argo CD, Helm, Prometheus, Grafana, Loki, PostgreSQL, Redis, OpenBao, Harbor]
-cover: /media/covers/tidan-platform.svg
-coverAlt: "Illustration: GitHub feeding Argo CD, which runs games, data and operations"
+snippet:
+  file: Arcana-Argocd-Apps / prod/portfolio.yaml
+  code: |
+    kind: Application
+    metadata:
+      name: portfolio
+    spec:
+      source:
+        repoURL: git@github.com:jojobobby/portfolio.git
+        targetRevision: main
+        path: deploy
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
 stats:
   - { value: '35', label: 'apps deployed by Argo CD' }
   - { value: '130+', label: 'pods on one node' }

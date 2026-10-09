@@ -19,6 +19,11 @@ const projects = defineCollection({
     // YouTube video id (the part after watch?v=). Shown instead of the cover when set.
     video: z.string().optional(),
     coverAlt: z.string().optional(),
+    // Real code or config from the project, shown as the tile's picture when there is no video
+    // or screenshot. Never a drawn illustration.
+    snippet: z.object({ file: z.string(), code: z.string() }).optional(),
+    // For work with nothing public to show (employers' private code): a few facts on the tile instead.
+    highlights: z.array(z.string()).default([]),
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
   }),
 });

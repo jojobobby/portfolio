@@ -7,8 +7,10 @@ section: professional
 order: 1
 summary: Led the move of production from AWS ECS to self-managed Kubernetes.
 tech: [k3s, Helm, Argo CD, GitHub Actions, Terraform, Ansible, Vault, Prometheus, Grafana]
-cover: /media/covers/vail-sre.svg
-coverAlt: "Illustration: containers moving from AWS ECS to Kubernetes"
+highlights:
+  - Dev, staging and prod on k3s with Helm and Argo CD
+  - Prometheus, Grafana and Loki to check every rollout
+  - Locked down with RBAC, network policies and certificate SSH
 ---
 
 - Migrated services from AWS ECS to k3s with Helm and Argo CD (dev, staging, prod).

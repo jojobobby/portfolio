@@ -13,7 +13,7 @@ video: hUZl8HxzW1o
 stats:
   - { value: '818', label: 'player accounts' }
   - { value: '2,000+', label: 'of my commits' }
-  - { value: '~2,470', label: 'automated tests' }
+  - { value: '2,400+', label: 'automated tests' }
   - { value: '200 to 500', label: 'playtesters' }
 ---
 
@@ -28,6 +28,18 @@ client, design the content, and run it in production.
   protection, and a fight tag stops you escaping mid-fight.
 - **Allies:** summons, turrets and pets share one system, and you choose whose you see.
 - **Enemy levels:** each enemy gets a level and a rank, and one formula sets its stats.
+
+## From the game
+
+<div class="sprites">
+  <figure><img src="/media/arcana/mysterious-merchant-greet.gif" alt="Mysterious Merchant waving" /><figcaption>Mysterious Merchant</figcaption></figure>
+  <figure><img src="/media/arcana/expedition-herald-greet.gif" alt="Expedition Herald greeting" /><figcaption>Expedition Herald</figcaption></figure>
+  <figure><img src="/media/arcana/item-buyer-greet.gif" alt="Item Buyer greeting" /><figcaption>Item Buyer</figcaption></figure>
+  <figure><img src="/media/arcana/sandsurge-behemoth-rise.gif" alt="Sandsurge Behemoth rising" /><figcaption>Sandsurge Behemoth</figcaption></figure>
+  <figure><img src="/media/arcana/reef-lantern-angler-surface.gif" alt="Reef Lantern Angler surfacing" /><figcaption>Reef Lantern Angler</figcaption></figure>
+  <figure><img src="/media/arcana/wandering-igloo-open.gif" alt="Wandering Igloo opening" /><figcaption>Wandering Igloo</figcaption></figure>
+  <figure><img src="/media/arcana/radiant-reef-portal.gif" alt="Radiant Reef portal" /><figcaption>Radiant Reef portal</figcaption></figure>
+</div>
 
 ## C# and .NET
 

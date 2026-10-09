@@ -7,8 +7,14 @@ section: professional
 order: 3
 summary: Eight years of C#. Game servers, APIs, websites, launchers and tools.
 tech: [C#, .NET 10, ASP.NET Core, Razor Pages, WPF / XAML, Blazor, MonoGame, prometheus-net, NUnit, xUnit]
-cover: /media/covers/csharp-dotnet.svg
-coverAlt: "Illustration: the .NET versions I've used, from .NET Framework 4.6 in 2018 to .NET 10 in 2026"
+snippet:
+  file: Arcana / DungeonWorld.cs, commit 9846c6e
+  code: |2
+      public List<Player> rewardedPlayers;
+      public List<DungeonEnemy> dungeonBosses;
+    - public List<DungeonEnemy> dungeonEnemies;
+    + // A set, not a list: the Overworld holds ~50k enemies...
+    + public HashSet<DungeonEnemy> dungeonEnemies;
 stats:
   - { value: '8 yrs', label: 'writing C#' }
   - { value: '2,000+', label: 'of my commits touch C#' }
