@@ -10,4 +10,4 @@ tech: [Java, TypeScript, MySQL]
 ---
 
 Built full-stack apps with Java, TypeScript and MySQL, mentored by senior engineers. I now run
-the cluster the foundation's interns deploy to.
+the cluster the foundation's interns deploy to. See [Kubernetes platform engineering](/projects/kubernetes-platform).

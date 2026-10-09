@@ -4,7 +4,7 @@ org: Tidan Games, Cosmic Realm and my own projects
 role: Lead Engineer
 dates: 2018 to Present
 section: professional
-order: 3
+order: 4
 summary: Eight years of C#. Game servers, APIs, websites, launchers and tools.
 tech: [C#, .NET 10, ASP.NET Core, Razor Pages, WPF / XAML, Blazor, MonoGame, prometheus-net, NUnit, xUnit]
 snippet:

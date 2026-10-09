@@ -4,7 +4,7 @@ org: Vail Systems
 role: Software Engineer Intern
 dates: Mar 2023 to Aug 2024
 section: professional
-order: 2
+order: 3
 summary: Shipped features weekly in React, Node.js and SQL.
 tech: [React, TypeScript, Node.js, Prisma, SQL, Docker]
 highlights:

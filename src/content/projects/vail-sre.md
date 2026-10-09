@@ -1,23 +1,20 @@
 ---
-title: AWS ECS to Kubernetes
+title: Helm and Argo CD deployments
 org: Vail Systems
 role: SRE Apprentice
 dates: Aug 2024 to Present
 section: professional
-order: 1
-summary: Led the move of production from AWS ECS to self-managed Kubernetes.
-tech: [k3s, Helm, Argo CD, GitHub Actions, Terraform, Ansible, Vault, Prometheus, Grafana]
+order: 2
+summary: Helping Vail deploy and maintain its services with Helm and Argo CD.
+tech: [Kubernetes, Helm, Argo CD]
 highlights:
-  - Dev, staging and prod on k3s with Helm and Argo CD
-  - Prometheus, Grafana and Loki to check every rollout
-  - Locked down with RBAC, network policies and certificate SSH
+  - Deploy and maintain Vail's services with Helm and Argo CD
+  - Work on Vail's existing Kubernetes and Argo CD setup
 ---
 
-- Migrated services from AWS ECS to k3s with Helm and Argo CD (dev, staging, prod).
-- Rebuilt CI/CD around GitOps: GitHub Actions builds, Argo CD releases.
-- Run Terraform, Ansible, Vault, cert-manager and Prometheus/Grafana/Loki.
-- Locked down access: RBAC, network policies, certificate SSH, 2FA.
-- Containerized legacy C++ services.
-- Mentor Seneca Foundation interns on a training cluster I built.
+I help Vail deploy and maintain its services. Vail's Kubernetes and Argo CD setup was already
+running when I joined. My part is the deployments on top of it: Helm charts, released through
+Argo CD, and keeping them healthy afterwards.
 
-More in [how Seneca's infrastructure evolved](/writing/seneca-infrastructure-journey).
+The clusters I designed and run myself are on the
+[Kubernetes platform engineering](/projects/kubernetes-platform) page.

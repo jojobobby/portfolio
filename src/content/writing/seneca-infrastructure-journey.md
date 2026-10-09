@@ -4,7 +4,7 @@ date: 2026-10-06
 kind: engineering
 tag: learning
 summary: How Seneca Foundation's infrastructure got rebuilt five times.
-project: vail-sre
+project: kubernetes-platform
 ---
 
 Seneca Foundation runs an apprenticeship where new engineers build and ship real

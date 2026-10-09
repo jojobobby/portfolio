@@ -4,7 +4,7 @@ date: 2026-08-30
 kind: engineering
 tag: consideration
 summary: What a k3s cluster costs on AWS and OVH, over 1 year and 10.
-project: vail-sre
+project: kubernetes-platform
 ---
 
 When Seneca Foundation's Kubernetes cluster needed a long-term home, I wrote a technical and

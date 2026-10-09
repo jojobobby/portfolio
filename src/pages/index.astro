@@ -15,30 +15,30 @@ const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueO
 // The headline facts, each linked to the page or post that backs it up.
 const highlights = [
   {
-    area: 'Game development',
+    area: 'Game design and development',
     items: [
-      { value: '818', label: 'Arcana player accounts', href: '/projects/arcana' },
-      { value: '3,000', label: 'Cosmic Realm accounts over 8 years', href: '/projects/cosmic-realm' },
-      { value: '99.71%', label: 'PvP hits landing in the lag window, up from 97.87%', href: '/writing/pvp-at-10-tps' },
-      { value: '50+', label: 'players test every update before it ships', href: '/writing/playtest-constantly' },
+      { value: '10,000+', label: 'accounts created on my games', href: '/#studio' },
+      { value: '8 years', label: 'designing and running live multiplayer games, 2018 to 2026', href: '/projects/cosmic-realm' },
+      { value: 'CI-UT', label: 'every update played by 50+ testers before it ships', href: '/writing/playtest-constantly' },
+      { value: '5', label: 'design lessons from shipping games, written up', href: '/writing' },
     ],
   },
   {
     area: 'Site reliability',
     items: [
-      { value: '35', label: 'apps on my own k3s cluster, all deployed from Git', href: '/projects/tidan-platform' },
-      { value: '3', label: 'environments I moved from AWS ECS to k3s at Vail', href: '/projects/vail-sre' },
-      { value: '62%', label: 'cheaper per year on OVH than AWS, from my cost analysis', href: '/writing/aws-vs-ovh-k3s-cost-analysis' },
-      { value: '7.4 s to 0.1 s', label: 'start-up for 100 players at once, with HTTP caching', href: '/projects/csharp-dotnet' },
+      { value: '5', label: 'deployment architectures built, run and replaced', href: '/writing/seneca-infrastructure-journey' },
+      { value: '2', label: 'production Kubernetes clusters I run with GitOps', href: '/projects/kubernetes-platform' },
+      { value: '4', label: 'postmortems written, 2 of them public so far', href: '/writing' },
+      { value: '$12.6k', label: 'projected 10 year saving on one node, from my hosting analysis', href: '/writing/aws-vs-ovh-k3s-cost-analysis' },
     ],
   },
   {
     area: 'Software engineering',
     items: [
+      { value: '4,600+', label: 'commits across 64 repos since 2018', href: '/projects/csharp-dotnet' },
+      { value: '1,879', label: 'of them written 2018 to 2024, before I used AI tools', href: '/projects/csharp-dotnet' },
+      { value: '4.6 to 10', label: '.NET versions my servers have run on', href: '/projects/csharp-dotnet' },
       { value: '26 s to 1 s', label: 'server freeze fixed by swapping a List for a HashSet', href: '/writing/list-that-froze-the-server' },
-      { value: '16,384 to 10', label: 'map chunks searched per tick with 10 players online', href: '/writing/only-check-where-players-are' },
-      { value: '2,400+', label: 'automated tests in Arcana', href: '/projects/arcana' },
-      { value: '3,500+', label: 'of my commits across Arcana and Cosmic Realm', href: '/projects/csharp-dotnet' },
     ],
   },
 ];
