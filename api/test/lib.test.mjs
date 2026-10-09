@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateComment, clientIp, LIMITS } from '../lib.mjs';
+import { parseDateText, collect } from '../youtube.mjs';
 
 const ok = { post: 'pvp-at-10-tps', name: ' Ralph ', body: 'Nice post', deviceId: 'abcdef12-3456', email: '' };
 
@@ -30,4 +31,18 @@ test('client ip is the last X-Forwarded-For entry (the one our ingress added)', 
   assert.equal(clientIp({ 'x-forwarded-for': '6.6.6.6, 203.0.113.9' }, '10.42.0.1'), '203.0.113.9');
   assert.equal(clientIp({}, '::ffff:198.51.100.4'), '198.51.100.4');
   assert.equal(clientIp({ 'x-forwarded-for': 'not-an-ip<script>' }, ''), null);
+});
+
+test('youtube date text becomes an ISO date', () => {
+  assert.equal(parseDateText('Aug 19, 2023'), '2023-08-19');
+  assert.equal(parseDateText('Premiered Jun 3, 2025'), '2025-06-03');
+  assert.equal(parseDateText('Streamed live on Sep 28, 2026'), '2026-09-28');
+  assert.equal(parseDateText('3 years ago'), null);
+});
+test('collect finds videos and the next-page token anywhere in the page data', () => {
+  const page = { a: [{ richItemRenderer: { content: { videoRenderer: { videoId: 'abcdefghijk', title: { runs: [{ text: 'Hi' }] } } } } },
+    { continuationItemRenderer: { continuationEndpoint: { continuationCommand: { token: 'T' } } } }] };
+  const out = collect(page);
+  assert.deepEqual(out.items, [{ id: 'abcdefghijk', title: 'Hi' }]);
+  assert.equal(out.next, 'T');
 });

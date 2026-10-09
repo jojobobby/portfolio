@@ -36,7 +36,27 @@ async function channelVideos(handle) {
   return out.items.filter((v) => v.id && !seen.has(v.id) && seen.add(v.id));
 }
 
+const MONTHS = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
+
+/** "Aug 19, 2023" / "Premiered Aug 19, 2023" / "Streamed live on Aug 19, 2023" -> "2023-08-19". Exported for tests. */
+export function parseDateText(text) {
+  const m = String(text || '').match(/([A-Z][a-z]{2})[a-z]* (\d{1,2}), (\d{4})/);
+  if (!m || !MONTHS[m[1]]) return null;
+  return `${m[3]}-${MONTHS[m[1]]}-${m[2].padStart(2, '0')}`;
+}
+
+// The watch page answers servers in data centres with a consent page and the player API asks
+// them to sign in, but the "next" API (what loads beside a playing video) still has the date.
 async function uploadDate(id) {
+  try {
+    const res = await fetch('https://www.youtube.com/youtubei/v1/next', {
+      method: 'POST', headers: { ...HEADERS, 'content-type': 'application/json' },
+      body: JSON.stringify({ videoId: id, context: { client: { clientName: 'WEB', clientVersion: '2.20250101.00.00', hl: 'en' } } }),
+    });
+    const text = JSON.stringify(await res.json()).match(/"dateText":\{"simpleText":"([^"]+)"/)?.[1];
+    const date = parseDateText(text);
+    if (date) return date;
+  } catch {}
   const html = await (await fetch(`https://www.youtube.com/watch?v=${id}`, { headers: HEADERS })).text();
   return html.match(/"(?:uploadDate|publishDate)":"(\d{4}-\d{2}-\d{2})/)?.[1] || null;
 }

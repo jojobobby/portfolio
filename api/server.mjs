@@ -5,7 +5,7 @@ import http from 'node:http';
 import pg from 'pg';
 import nodemailer from 'nodemailer';
 import { LIMITS, validateComment, clientIp, token, mail } from './lib.mjs';
-import { migrateVideos, scheduleVideoSync, listVideos, videoThumb } from './youtube.mjs';
+import { migrateVideos, scheduleVideoSync, syncVideos, listVideos, videoThumb } from './youtube.mjs';
 
 pg.types.setTypeParser(1082, (v) => v); // dates stay 'YYYY-MM-DD' strings, no time zone shifts
 const CHANNEL = process.env.YOUTUBE_HANDLE || '@RalphOfc';
@@ -173,6 +173,10 @@ const server = http.createServer(async (req, res) => {
       if (!hit) return redirect(res, `${SITE}/writing`);
       await db.query('UPDATE comments SET notify = false WHERE email = $1', [hit.email]);
       return redirect(res, `${SITE}/writing/${hit.post}?unsubscribed=1#comments`);
+    }
+    if (url.pathname === '/api/videos/sync' && req.method === 'POST') {
+      if (!ADMIN_TOKEN || req.headers.authorization !== `Bearer ${ADMIN_TOKEN}`) return send(res, 403, { error: 'Forbidden.' });
+      return send(res, 200, await syncVideos(db, CHANNEL));
     }
     const del = url.pathname.match(/^\/api\/comments\/(\d+)$/);
     if (del && req.method === 'DELETE') {
