@@ -90,4 +90,16 @@ One server, everything defined in Git. Push a change and Argo CD applies it.
 - **Also runs:** the games, a store, email, a wiki, an issue tracker and a support desk.
 - **Security:** non-root containers, no privileged pods, network policies.
 
+## Operating it
+
+- **Networking:** Caddy routing and MetalLB LoadBalancer configuration: exposed ports, IP pools,
+  address allocation and service connectivity.
+- **When nodes won't start:** I've tracked down node-readiness and CNI initialization failures,
+  including Cilium routing and tunnel configuration and Calico networking issues.
+- **Image pulls:** registry authentication, pending workloads and failed pulls on self-managed
+  clusters.
+- **Storage:** hostPath-backed locations for game databases, backups and server logs.
+- **Access:** manifests, namespaces, RBAC, secrets and service accounts for every deployment.
+- **Payments:** Stripe connected to player accounts across two game servers.
+
 **Next:** off-site backups and a second node.

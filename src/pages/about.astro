@@ -2,8 +2,18 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 
-// Kept in sync with the résumé PDFs by hand. Public page: no phone number or street address.
-const jobs = [
+// Built from my four résumés. Public page: no phone number or street address.
+type Entry = {
+  title: string;
+  org: string;
+  when: string;
+  link?: string;
+  intro?: string;
+  points?: string[];
+  groups?: { name: string; points: string[] }[];
+};
+
+const professional: Entry[] = [
   {
     title: 'Site Reliability Engineer Apprentice',
     org: 'Vail Systems',
@@ -11,20 +21,15 @@ const jobs = [
     link: '/projects/vail-sre',
     points: [
       'Help deploy and maintain Vail’s services with Helm and Argo CD, on Vail’s existing Kubernetes and Argo CD setup.',
-    ],
-  },
-  {
-    title: 'Kubernetes Platform Engineer',
-    org: 'Seneca Foundation and Tidan Games',
-    when: '2024 to Present',
-    link: '/projects/kubernetes-platform',
-    points: [
-      'Rebuilt the deployment architecture five times as scope grew: Compose, systemd services, AWS ECS with CI/CD (config in the repo, tests before deploy), self-hosted Kubernetes, then Seneca Foundation’s official cluster under my mentor Harrison.',
-      'Run two production k3s clusters, Seneca Foundation’s and Tidan Games’, with Helm and Argo CD GitOps, Prometheus/Grafana/Loki, self-managed PostgreSQL and Redis, Harbor and OpenBao/Vault-style secrets.',
-      'Provision hosts with Terraform and Ansible (certificate SSH, 2FA, firewalls), with certificates from cert-manager.',
-      'Wrote a 1 year and 10 year cost analysis of AWS and OVH for hosting the cluster.',
-      'Built the home lab behind it: Proxmox, networking and routing, and my own DNS server and router. Studying for the CKA.',
-      'Run the training cluster Seneca Foundation’s interns deploy to.',
+      'Translated application ports, environment variables, secrets, dependencies and health checks into Kubernetes deployment configuration, and validated service startup and release behavior.',
+      'Built GitHub Actions pipelines for Node.js/Next.js and .NET services that publish versioned container images and coordinate database migrations and health checks during releases.',
+      'Wrote deployment, update and account-provisioning scripts to automate recurring operational tasks and application onboarding.',
+      'Used Terraform for infrastructure and Ansible for host configuration.',
+      'Managed Harbor, cert-manager, ingress, secrets, RBAC and service-account image-pull access for containerized workloads.',
+      'Operated Grafana, Loki and Prometheus to inspect application behavior, container health, logs and failed deployments.',
+      'Investigated CI/CD, rollout, networking and registry failures across application and infrastructure layers, and helped coworkers troubleshoot deployment issues.',
+      'Containerized C++ services with Conan and build tooling, so native builds ship through container-based delivery.',
+      'Mentored interns on networking, load balancing, SSH, Docker and Podman, container orchestration, Helm, Kubernetes deployments, environment security, and CPU and memory limits.',
     ],
   },
   {
@@ -33,31 +38,27 @@ const jobs = [
     when: 'Mar 2023 to Aug 2024',
     link: '/projects/vail-software',
     points: [
-      'Delivered full-stack features weekly in React, TypeScript, Node.js, Express, Prisma and SQL.',
-      'Traced defects across UI, API, database and deployment layers; improved release workflows.',
+      'Developed and debugged in-house applications with JavaScript, TypeScript, React, Node.js, Express and object-oriented design, shipping features in weekly cycles with cross-functional teams.',
+      'Designed and maintained backend systems: REST APIs, Prisma/ORM data access, SQL and database connection pooling.',
+      'Traced defects across the UI, API, database, container runtime and deployment layers.',
+      'Improved application configuration and container-based release workflows.',
+      'Worked with experienced engineers to improve code quality, maintainability and delivery.',
     ],
   },
   {
-    title: 'Founder',
-    org: 'Tidan Games LLC',
-    when: 'Sep 2026 to Present',
-    link: '/projects/arcana',
+    title: 'Kubernetes platform engineering',
+    org: 'Seneca Foundation and Tidan Games',
+    when: '2024 to Present',
+    link: '/projects/kubernetes-platform',
     points: [
-      'Run an independent multiplayer game studio, leading engineers, artists and testers across game servers, clients, APIs, databases and infrastructure.',
-      'Lead engineer and designer of Arcana (formerly Tidan’s Realm VI, 818 player accounts); operate the studio platform (35 Argo CD applications on k3s).',
-      'Write the C#/.NET 10 game server, ASP.NET Core Razor Pages website and tools, and WPF/XAML launcher; cut a 26 s server stall to about 1 s by replacing a List with a HashSet and time-slicing the work.',
-    ],
-  },
-  {
-    title: 'Lead Software Engineer & Owner',
-    org: 'Cosmic Realm (originally Tidan’s Realm)',
-    when: 'Aug 2018 to 2026',
-    link: '/projects/cosmic-realm',
-    points: [
-      'Built and operated a C# multiplayer game server: 3,000 registered accounts, 200 peak concurrent players.',
-      'C#/.NET MMORPG server with multithreaded game instances, hybrid UDP/TCP networking, a player-driven market and an auto-updating WPF launcher.',
-      'Upgraded the server from .NET Framework 4.6 to .NET 10; built an ASP.NET Core account server and a Razor Pages shop with Stripe.',
-      'Ran production on k3s with Kustomize and Argo CD, Redis backups three times daily, and Prometheus/Grafana/Loki.',
+      'Rebuilt the deployment architecture five times as scope grew: Compose, systemd services, AWS ECS with CI/CD, self-hosted Kubernetes, then Seneca Foundation’s official cluster under my mentor Harrison.',
+      'Built deployment workflows for dedicated Linux servers with Podman Compose and systemd, and for AWS ECS with ECR, IAM, security groups, ACM and Route 53, with the configuration in the repo and tests before every deploy.',
+      'Run two production k3s clusters, Seneca Foundation’s and Tidan Games’, with Helm and Argo CD GitOps, Prometheus, Grafana and Loki, self-managed PostgreSQL and Redis, Harbor, and Vault-style secrets.',
+      'Provision hosts with Terraform and Ansible: certificate SSH, 2FA, firewalls and network policies.',
+      'Wrote a 1 year and 10 year cost analysis of AWS and OVH for hosting the cluster.',
+      'Built the home lab behind it: Proxmox, networking and routing, and my own DNS server and router.',
+      'Built and run the training cluster where Seneca Foundation’s interns deploy real applications with Helm and GitOps.',
+      'Studying for the Certified Kubernetes Administrator (CKA) exam.',
     ],
   },
   {
@@ -65,30 +66,137 @@ const jobs = [
     org: 'Seneca Foundation',
     when: 'Jul 2022 to Apr 2023',
     link: '/projects/seneca',
-    points: ['Built full-stack applications with Java, TypeScript and MySQL under senior-engineer mentorship.'],
+    points: [
+      'Built full-stack applications with Java, TypeScript and MySQL under senior engineer mentorship.',
+      'Practiced debugging, testing, Git, terminal navigation and Vim, took part in code reviews, and delivered changes with engineering feedback.',
+      'Applied Java, HTML5, JavaScript, CSS and SQL fundamentals to application development and technical exercises.',
+    ],
+  },
+];
+
+const independent: Entry[] = [
+  {
+    title: 'Founder',
+    org: 'Tidan Games LLC',
+    when: 'Sep 2026 to Present',
+    link: '/projects/arcana',
+    points: [
+      'Run an independent multiplayer game studio, leading engineers, artists and testers across game servers, clients, APIs, databases and deployment infrastructure.',
+      'Lead engineer and designer of Arcana (formerly Tidan’s Realm VI): 818 player accounts on the live server.',
+      'Run the studio’s platform on k3s: 35 Argo CD applications, including the games, a store, email, a wiki, an issue tracker and a support desk.',
+    ],
+  },
+  {
+    title: 'Lead Software Engineer and Owner',
+    org: 'Cosmic Realm (originally Tidan’s Realm)',
+    when: 'Nov 2018 to Sep 2026',
+    link: '/projects/cosmic-realm',
+    intro: 'Reached 3,000 registered accounts and a peak of 200 concurrent players, with about 30 online on an average day.',
+    groups: [
+      {
+        name: 'Server',
+        points: [
+          'Designed and deployed a C#/.NET MMORPG server with multithreaded game instances and real-time entity updates.',
+          'Built hybrid UDP/TCP networking with encrypted binary packets, WebSocket support, and packet processing and queueing.',
+          'Implemented real-time synchronization, combat, raids, loot, player progression and a persistent game economy, plus a player-driven market.',
+          'Integrated Redis caching and built an XML/API-driven pipeline for game content.',
+          'Modernized older C# 8 patterns with C# 11 conventions: LINQ, spans, hash-based collections, required members and ref semantics.',
+          'Moved the client from browser Flash (ActionScript 3) to Adobe AIR so players kept playing when Flash support ended.',
+        ],
+      },
+      {
+        name: 'Delivery and operations',
+        points: [
+          'Automated builds and delivery for game servers, launchers and clients with Docker and GitHub Actions, with development and production on separate branches watched by Argo CD.',
+          'Hosted environments on k3s with Kustomize configuration and Argo CD app-of-apps.',
+          'Deployed Redis with persistent volume claims and ran database backups three times a day through a Kubernetes CronJob, disconnecting Redis clients before each backup.',
+          'Collected user-activity metrics and kept separate development and production observability with Grafana, Prometheus and Loki.',
+          'Created an auto-updating XAML game launcher.',
+        ],
+      },
+      {
+        name: 'Team',
+        points: [
+          'Hired and paid developers, artists and game-balancing contributors to spread the workload, and turned player feedback into a prioritized roadmap.',
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Lead Engineer and Designer',
+    org: 'Arcana (formerly Tidan’s Realm VI)',
+    when: '2023 to Present',
+    link: '/projects/arcana',
+    points: [
+      'Developed the C#/.NET multiplayer server and client systems: multithreaded game instances, entity behavior, AI, and persistent player systems backed by Redis and PostgreSQL.',
+      'Built player trading and markets, crafting and transmutation, skill trees, potion storage, quests, inventory and progression.',
+      'Implemented and refined movement, sprint, AI-follow behavior and status effects, keeping game rules in step with client movement and server updates.',
+      'Used entity inheritance and interfaces, XML/API-driven game data, caching and object disposal throughout the server.',
+      'Maintained the ActionScript/Adobe AIR client and work on the current Haxe/OpenFL Windows client, with Lime, hxcpp and the Visual Studio C++ toolchain.',
+      'Documented the Windows client build prerequisites and commands for the Haxe/OpenFL toolchain and the .NET server solution.',
+      'Supported playtesting with about 200 to 500 unique testers over the project and 5 to 20 monthly playtesters, using their feedback to guide development.',
+    ],
+  },
+  {
+    title: 'Game infrastructure and operations',
+    org: 'Cosmic Realm and Arcana',
+    when: '2020 to Present',
+    link: '/projects/tidan-platform',
+    points: [
+      'Deployed and maintained game services on k3s with Helm, Argo CD, GitHub Actions and container registries, with separate testing and production environments.',
+      'Managed Kubernetes manifests, namespaces, application configuration, RBAC, secrets and service-account access for game deployments.',
+      'Worked on Caddy routing and MetalLB LoadBalancer configuration: exposed ports, IP pools, address allocation and service connectivity.',
+      'Investigated Kubernetes node-readiness and CNI initialization failures, including Cilium routing and tunnel configuration and Calico networking issues.',
+      'Investigated image-pull failures, registry authentication, pending workloads and deployment behavior on self-managed clusters.',
+      'Managed hostPath-backed storage for game databases, backups and server logs.',
+      'Integrated Stripe with player accounts across two game servers to support purchases.',
+    ],
+  },
+  {
+    title: 'Windows launcher engineering',
+    org: 'Cosmic Realm and Arcana',
+    when: '2020 to Present',
+    link: '/projects/windows-launcher',
+    points: [
+      'Developed and maintained auto-updating Windows game launchers in C#, WPF and XAML, starting on .NET Framework 4.8.',
+      'Implemented version checking, asynchronous ZIP downloads and extraction, local version tracking, update states and game launch.',
+      'Built reusable XAML components and scalable interface assets while keeping the existing update and play flow.',
+    ],
+  },
+  {
+    title: 'Technical collaboration',
+    org: 'Independent projects',
+    when: 'Ongoing',
+    points: [
+      'Reviewed architecture, workflows and design decisions with C#, DevOps and SRE professionals, and applied their feedback across my projects.',
+    ],
   },
 ];
 
 const skills = [
-  ['Reliability & platform', 'Kubernetes (k3s), Helm, Kustomize, Argo CD, GitOps, Prometheus, Grafana, Loki, cert-manager, ingress, RBAC, network policies, secrets management'],
-  ['Cloud & automation', 'AWS (ECS, ECR, EC2, IAM, Secrets Manager, Route 53, ACM), Terraform, Ansible, Linux, systemd, SSH'],
-  ['Delivery', 'GitHub Actions, Docker, Podman, Harbor, BuildKit, release engineering'],
-  ['Languages', 'C# (since 2018), C++, TypeScript, JavaScript, Python, Java, Haxe, Bash, SQL'],
-  ['.NET', '.NET Framework 4.6 to .NET 10, ASP.NET Core, Razor Pages, Blazor, WPF/XAML, MonoGame, prometheus-net, NUnit, xUnit'],
-  ['Software', 'React, Next.js, Node.js, Express, Prisma, REST APIs, Haxe/OpenFL'],
-  ['Data', 'PostgreSQL, Redis, MySQL, migrations, connection pooling'],
-  ['Game systems', 'Multiplayer networking (TCP/UDP, WebSockets, binary protocols), multithreading, combat, progression, economies, dungeon and systems design'],
+  ['Languages and web', 'C# (since 2018), C++, TypeScript, JavaScript, Java, Python, Bash, SQL; React, Next.js, Node.js, Express, HTML5, CSS, REST APIs'],
+  ['.NET', '.NET Framework 4.6 to .NET 10, ASP.NET Core, Razor Pages, Blazor, WPF/XAML, MonoGame, LINQ, spans, prometheus-net, NUnit, xUnit'],
+  ['Containers and delivery', 'Kubernetes (k3s), Helm, Kustomize, Argo CD, GitOps, GitHub Actions, Git, Docker, Podman, Podman Compose, Harbor, BuildKit'],
+  ['Cloud and automation', 'AWS (ECS, ECR, EC2, IAM, Secrets Manager, Route 53, ACM, security groups), Terraform, Ansible, Linux, systemd, SSH'],
+  ['Reliability and networking', 'Grafana, Loki, Prometheus, ingress, Caddy, MetalLB, cert-manager, TLS, RBAC, service accounts, secrets, network policies, health checks, rollout investigation, incident investigation, high availability design, capacity and cost optimization, production operations for live services, Cilium and Calico troubleshooting'],
+  ['Data and persistence', 'PostgreSQL, Redis, MySQL, SQL, Prisma, ORMs, connection pooling, database migrations, PVCs, CronJobs'],
+  ['Client and systems', 'ActionScript 3, Adobe AIR, Haxe/OpenFL, Lime, hxcpp, WPF/XAML, Conan, TCP/UDP, WebSockets, binary serialization, multithreading, Vim'],
+  ['Game systems', 'Multiplayer networking, combat, progression, economies, dungeon and systems design, playtesting'],
+  ['Leadership', 'Team leadership across engineering, art, design, QA and audio; intern mentorship and training environments; roadmap prioritization from player feedback; cross-functional delivery; code review'],
 ];
 ---
 <Base title="About & Résumé" description="About Rapheal Robinson, site reliability engineer and game developer, with his résumé.">
   <h1>About</h1>
   <div class="prose">
     <p>
-      SRE at Vail Systems and founder of Tidan Games. I've been making multiplayer games since 2018,
-      and running them is what got me into infrastructure.
-      More than 10,000 accounts have been created on my games.
+      SRE apprentice at Vail Systems and founder of Tidan Games. I've been making multiplayer games since 2018,
+      and running them is what got me into infrastructure. More than 10,000 accounts have been
+      created on my games.
     </p>
-    <p class="dim">Based near Chicago and open to relocation. I speak English and Spanish, and I'm studying for the CKA.</p>
+    <p class="dim">
+      Based in the Chicago area, authorized to work in the U.S. and open to relocation. I speak English and
+      Spanish, and I'm studying for the CKA.
+    </p>
   </div>
   <div class="actions">
     <a class="btn" href={`mailto:${SITE.email}`}>Email me</a>
@@ -100,12 +208,44 @@ const skills = [
   <h2 class="section-title">Résumé</h2>
   <hr class="section-rule" />
   <div class="prose">
-    <h2>Experience</h2>
-    {jobs.map((j) => (
+    <h2>Summary</h2>
+    <p>
+      Site reliability and software engineer. I deploy and maintain services with Helm and Argo CD at
+      Vail, run Kubernetes clusters for Seneca Foundation and Tidan Games, and build real-time multiplayer
+      game servers in C#/.NET. I built and operated Cosmic Realm's server, which reached 3,000 registered
+      accounts and 200 concurrent players at peak.
+    </p>
+
+    <h2>Professional experience</h2>
+    {professional.map((j) => (
       <div class="resume-job">
-        <h3><a href={j.link}>{j.title}</a>, {j.org}</h3>
+        <h3>{j.link ? <a href={j.link}>{j.title}</a> : j.title}, {j.org}</h3>
         <div class="when">{j.when}</div>
-        <ul>{j.points.map((p) => <li>{p}</li>)}</ul>
+        {j.intro && <p>{j.intro}</p>}
+        {j.points && <ul>{j.points.map((p) => <li>{p}</li>)}</ul>}
+        {j.groups && j.groups.map((g) => (
+          <>
+            <h4>{g.name}</h4>
+            <ul>{g.points.map((p) => <li>{p}</li>)}</ul>
+          </>
+        ))}
+      </div>
+    ))}
+
+    <h2>Studio leadership and independent engineering</h2>
+    <p class="dim">Independent game development since Nov 2018. These roles predate the studio.</p>
+    {independent.map((j) => (
+      <div class="resume-job">
+        <h3>{j.link ? <a href={j.link}>{j.title}</a> : j.title}, {j.org}</h3>
+        <div class="when">{j.when}</div>
+        {j.intro && <p>{j.intro}</p>}
+        {j.points && <ul>{j.points.map((p) => <li>{p}</li>)}</ul>}
+        {j.groups && j.groups.map((g) => (
+          <>
+            <h4>{g.name}</h4>
+            <ul>{g.points.map((p) => <li>{p}</li>)}</ul>
+          </>
+        ))}
       </div>
     ))}
 
@@ -118,11 +258,12 @@ const skills = [
       </tbody>
     </table>
 
-    <h2>Education & certification</h2>
+    <h2>Education, certification and affiliation</h2>
     <ul>
       <li><strong>Associate in Arts, Computer Science</strong>, Prairie State College, Chicago Heights, IL (Jul 2025)</li>
       <li><strong>Google IT Support Certificate</strong> (May 2026), <a href="https://credly.com/go/aJ6UHHbO">verify on Credly</a></li>
       <li><strong>Certified Kubernetes Administrator (CKA)</strong>, in progress</li>
+      <li><strong>National Society of Black Engineers (NSBE)</strong>, At Large Collegiate, Region 4</li>
     </ul>
   </div>
 </Base>

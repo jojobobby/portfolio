@@ -14,13 +14,35 @@ stats:
   - { value: '8 yrs', label: 'live' }
 ---
 
-A live multiplayer action game I built and ran for eight years.
+A live multiplayer action game I built and ran for eight years. It reached 3,000 registered
+accounts and 200 players online at once, with about 30 on an average day.
 
-- C# game server: networking, combat, raids, loot, progression and a player market. Started on
-  .NET Framework 4.6, now on .NET 10.
+## Server
+
+- C# game server on .NET Framework 4.6 then, now .NET 10, with multithreaded game instances and
+  real-time entity updates.
+- Hybrid UDP and TCP networking with encrypted binary packets, WebSocket support, and packet
+  queueing.
+- Combat, raids, loot, progression, a persistent economy and a player-driven market.
+- Redis caching, and an XML and API driven pipeline for game content.
+- Modernized old C# 8 code with C# 11: LINQ, spans, hash-based collections, required members and
+  ref semantics.
 - Moved the client from browser Flash to Adobe AIR when Flash died, so players kept playing.
-- Ran it on Kubernetes with Argo CD, monitoring and automatic backups.
-- Hired and paid developers, artists and balance testers.
+
+## Running it
+
+- Docker and GitHub Actions build the servers, launchers and clients. Development and production
+  are separate branches watched by Argo CD.
+- k3s with Kustomize and an Argo CD app-of-apps.
+- Redis on persistent volumes, backed up three times a day by a Kubernetes CronJob, which
+  disconnected Redis clients first.
+- User-activity metrics, with separate development and production dashboards in Grafana,
+  Prometheus and Loki.
+
+## The team
+
+I hired and paid developers, artists and balance testers to share the work, and turned player
+feedback into the roadmap.
 
 ## C# and .NET
 

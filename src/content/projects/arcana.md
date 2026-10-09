@@ -29,6 +29,21 @@ client, design the content, and run it in production.
 - **Allies:** summons, turrets and pets share one system, and you choose whose you see.
 - **Enemy levels:** each enemy gets a level and a rank, and one formula sets its stats.
 
+## What I built
+
+- **Server:** C#/.NET with multithreaded game instances, entity behavior and AI, and persistent
+  player data in Redis and PostgreSQL.
+- **Player systems:** trading and a player market, crafting and transmutation, skill trees, potion
+  storage, quests, inventory and progression.
+- **Movement and combat:** movement, sprint, AI-follow and status effects, with the rules kept in
+  step between client and server.
+- **Client:** the ActionScript and Adobe AIR client, and the current Haxe and OpenFL Windows
+  client (Lime, hxcpp and the Visual Studio C++ toolchain).
+- **Payments:** Stripe tied to player accounts.
+- **Docs:** build steps for the Haxe client and the .NET server, so anyone can build it.
+- **Playtesting:** about 200 to 500 unique testers over the project and 5 to 20 each month,
+  whose feedback steers what I build next.
+
 ## From the game
 
 <div class="sprites">

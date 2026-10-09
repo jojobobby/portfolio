@@ -1,7 +1,7 @@
 ---
 title: Kubernetes platform engineering
 org: Seneca Foundation and Tidan Games
-role: Platform Engineer
+role: Platform engineering
 dates: 2024 to Present
 section: professional
 order: 1
@@ -23,10 +23,10 @@ right for its moment and wrong when the scope grew.
 
 ## The five architectures
 
-1. **Compose.** `docker compose up` and `podman compose up` on one server.
+1. **Compose.** `docker compose up` and `podman compose up` on dedicated Linux servers.
 2. **systemd services.** Units that start at boot and restart on failure, for uptime.
-3. **AWS ECS with CI/CD.** The configuration lives in the repo, and the pipeline tests before it
-   deploys.
+3. **AWS ECS with CI/CD.** ECR images, IAM, security groups, ACM certificates and Route 53, with
+   the configuration in the repo and the pipeline testing before it deploys.
 4. **Kubernetes, from scratch.** I tore down every ECS service and its pipeline, then worked
    through Kubernetes the Hard Way and self-hosted a cluster. Along the way I learned
    certificates, Proxmox, networking and routing, and set up my own DNS server and router at
@@ -46,6 +46,8 @@ The full story, with dates from git, is in
   Sealed Secrets and a self-hosted registry for Seneca.
 - **Edge:** ingress with cert-manager certificates.
 - **Provisioning:** Terraform and Ansible.
+- **Access:** RBAC with namespaced service accounts, network policies, certificate SSH, 2FA and
+  host firewalls.
 
 Tidan Games' cluster is on its own page: [Tidan Games Platform](/projects/tidan-platform).
 
@@ -55,7 +57,11 @@ When Seneca's cluster needed a long term home, I wrote a cost analysis of AWS an
 year and ten. At the medium tier, OVH is about $780 a year and AWS about $2,041, which is
 $12,609.60 apart over ten years on one node. See [AWS vs OVH costs](/writing/aws-vs-ovh-k3s-cost-analysis).
 
+## Training cluster
+
+I built and run the k3s cluster where Seneca Foundation's interns deploy real applications with
+Helm and GitOps, and I mentor them through it.
+
 ## Still learning
 
-I'm studying for the Certified Kubernetes Administrator (CKA) exam, and I run the cluster
-Seneca's interns deploy to.
+I'm studying for the Certified Kubernetes Administrator (CKA) exam.
