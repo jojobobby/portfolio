@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import ProjectTile from '../components/ProjectTile.astro';
 import YouTube from '../components/YouTube.astro';
 import { SITE } from '../site';
+import { videos, stamp, videoDate } from '../data/videos';
 
 const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const professional = all.filter((p) => p.data.section === 'professional');
@@ -18,15 +19,7 @@ const numbers = [
   { value: 'ECS to k3s', label: 'migration I led at Vail' },
 ];
 
-// From my channel. Titles are the videos' own.
-const videos = [
-  { id: 'cRzuc4sMsc4', title: 'Quest Showcase' },
-  { id: 'FiEjzFGnL5Y', title: 'Summoner Showcase' },
-  { id: 'o_K_tfyDBZI', title: 'Item Leveling Showcase' },
-  { id: 'MMVDr1D3cBE', title: 'Crafting Station Showcase' },
-  { id: 'j-M6-yfaEho', title: 'Crypt Centipede Boss Fight' },
-  { id: '23oV2G1G6sU', title: 'Boss Behavior' },
-];
+// Videos: src/data/videos.json (oldest first). Thumbnails are local copies: scripts/fetch-thumbnails.mjs.
 ---
 <Base>
   <section class="hero">
@@ -40,7 +33,7 @@ const videos = [
       </div>
     </div>
     <div class="hero__video">
-      <YouTube id="hUZl8HxzW1o" title="Arcana public testing gameplay" />
+      <YouTube id="hUZl8HxzW1o" title="Arcana public testing gameplay" date={videoDate('hUZl8HxzW1o')} />
     </div>
   </section>
 
@@ -60,10 +53,11 @@ const videos = [
     {videos.map((v) => (
       <a class="vid" href={`https://www.youtube.com/watch?v=${v.id}`}>
         <span class="vid__thumb">
-          <img src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`} onerror="this.onerror=null;this.src=this.src.replace('maxresdefault','hqdefault')" alt="" loading="lazy" decoding="async" />
+          <img src={`/media/yt/${v.id}.jpg`} alt="" loading="lazy" decoding="async" />
           <span class="play" aria-hidden="true">▶</span>
         </span>
         <span class="vid__title">{v.title}</span>
+        <span class="vid__date">{stamp(v.date)}</span>
       </a>
     ))}
   </div>

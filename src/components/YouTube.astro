@@ -1,8 +1,8 @@
 ---
 // Privacy-friendly YouTube embed: no cookies until the visitor presses play.
 // YouTube picks quality mostly from the player's size, so give it room; vq is only a hint.
-interface Props { id: string; title: string }
-const { id, title } = Astro.props;
+interface Props { id: string; title: string; date?: string }
+const { id, title, date } = Astro.props;
 ---
 <div class="video">
   <iframe
@@ -13,3 +13,4 @@ const { id, title } = Astro.props;
     allowfullscreen
   ></iframe>
 </div>
+{date && <p class="video__date">{title}, {date}</p>}

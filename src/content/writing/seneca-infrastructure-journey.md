@@ -1,8 +1,8 @@
 ---
-title: 'Tear it down, build it better: how Seneca Foundation went from docker compose to GitOps Kubernetes'
+title: From compose to Kubernetes
 date: 2026-10-06
 kind: engineering
-summary: Every time the scope changed, I ripped the architecture down and rebuilt it, from compose files to systemd to AWS ECS to Kubernetes. What each stage taught me, and how it shaped the clusters I run today.
+summary: How Seneca Foundation's infrastructure got rebuilt five times.
 project: vail-sre
 ---
 

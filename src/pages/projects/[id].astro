@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import YouTube from '../../components/YouTube.astro';
+import { videoDate } from '../../data/videos';
 
 export async function getStaticPaths() {
   const rank = { professional: 0, studio: 1, earlier: 2 };
@@ -29,7 +30,7 @@ const showShot = !d.video && d.cover && /\.(jpe?g|png|webp)$/i.test(d.cover);
     {d.tech.length > 0 && <div class="facts">{d.tech.map((t) => <span class="chip">{t}</span>)}</div>}
   </header>
 
-  {d.video && <YouTube id={d.video} title={`${d.title} gameplay`} />}
+  {d.video && <YouTube id={d.video} title={`${d.title} gameplay`} date={videoDate(d.video)} />}
   {showShot && <figure class="hero-media"><img src={d.cover} alt={d.coverAlt ?? ''} /></figure>}
 
   {d.stats.length > 0 && (

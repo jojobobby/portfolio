@@ -1,8 +1,8 @@
 ---
-title: 'Postmortem: a support desk that returned 500 because of a missing sticky bit'
+title: The missing sticky bit
 date: 2026-09-23
 kind: postmortem
-summary: I removed a privileged init container to harden a deployment. It existed for a reason, and the first person to find out was setting up the app.
+summary: A support desk 500 caused by hardening one thing too far.
 project: tidan-platform
 ---
 

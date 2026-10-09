@@ -1,8 +1,8 @@
 ---
-title: Getting a self-hosted mail server past Gmail
+title: Getting past Gmail
 date: 2026-09-21
 kind: engineering
-summary: Five rejections in a row, what each one meant, and the setup that finally put mail in the inbox instead of spam.
+summary: Five bounces from my own mail server, and what each one taught me.
 project: tidan-platform
 ---
 

@@ -31,11 +31,11 @@ client, design the content, and run it in production.
 
 ## More videos
 
-- [Quest Showcase](https://www.youtube.com/watch?v=cRzuc4sMsc4)
-- [Summoner Showcase](https://www.youtube.com/watch?v=FiEjzFGnL5Y)
-- [Item Leveling Showcase](https://www.youtube.com/watch?v=o_K_tfyDBZI)
-- [Crafting Station Showcase](https://www.youtube.com/watch?v=MMVDr1D3cBE)
-- [Item Enchants](https://www.youtube.com/watch?v=l-ouEhlwqAs)
+- [Item Enchants](https://www.youtube.com/watch?v=l-ouEhlwqAs), Aug 2023
+- [Quest Showcase](https://www.youtube.com/watch?v=cRzuc4sMsc4), Jun 2025
+- [Summoner Showcase](https://www.youtube.com/watch?v=FiEjzFGnL5Y), Jun 2025
+- [Item Leveling Showcase](https://www.youtube.com/watch?v=o_K_tfyDBZI), Jun 2025
+- [Crafting Station Showcase](https://www.youtube.com/watch?v=MMVDr1D3cBE), Jun 2025
 
 ## History
 

@@ -1,8 +1,8 @@
 ---
-title: 'AWS vs. OVH for a production k3s cluster: a 1-year and 10-year cost analysis'
+title: AWS vs OVH costs
 date: 2026-08-30
 kind: engineering
-summary: I priced a single-node k3s cluster with 1 TB of storage on AWS and OVHcloud at three tiers. OVH came out 58 to 87% cheaper, mostly because AWS bills storage and egress by usage.
+summary: What a k3s cluster costs on AWS and OVH, over 1 year and 10.
 project: vail-sre
 ---
 

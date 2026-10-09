@@ -290,3 +290,6 @@ p, li { color: var(--text); }
 .vid:hover .vid__thumb img { transform: scale(1.04); }
 .vid__title { font-weight: 600; font-size: 0.95rem; }
 .contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 48px; }
+.vid__date { font-family: var(--mono); font-size: 0.78rem; color: var(--warm); margin-top: -4px; }
+.video__date { margin: -10px 0 18px; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); }
+.hero__video .video__date { margin: 8px 0 0; }
